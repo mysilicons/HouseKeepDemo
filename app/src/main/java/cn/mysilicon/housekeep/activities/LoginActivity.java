@@ -88,6 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                             try {
                                 Log.d("服务端返回信息", jsonObject.toString());
                                 String msg = jsonObject.getString("msg");
+                                Integer user_id = jsonObject.getInt("user_id");
                                 Log.d("msg", msg);
                                 if (msg.equals("操作成功")) {
                                     //JSONObject detail = jsonObject.getJSONObject("uname");
@@ -96,6 +97,7 @@ public class LoginActivity extends AppCompatActivity {
                                     //写入SharedPreferences
                                     getSharedPreferences("user", MODE_PRIVATE)
                                             .edit()
+                                            .putInt("user_id", user_id)
                                             .putString("username", usernameStr)
                                             .putString("password", passwordStr)
                                             .putBoolean("isLogin", true)

@@ -1,4 +1,4 @@
-package cn.mysilicon.housekeep.activities;
+package cn.mysilicon.housekeep.utils;
 
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
@@ -24,7 +24,11 @@ import com.google.gson.JsonParser;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.mysilicon.housekeep.Adapter.AreaAdapter;
+import cn.mysilicon.housekeep.Adapter.CityAdapter;
+import cn.mysilicon.housekeep.Adapter.ProvinceAdapter;
 import cn.mysilicon.housekeep.R;
+import cn.mysilicon.housekeep.activities.CityInfoBean;
 
 /**
  * 作者：Allen
@@ -44,7 +48,7 @@ public class JDCityPicker extends PopupWindow {
     List<String> areaList = new ArrayList<>();
     ProvinceAdapter mProvinceAdapter;
     CityAdapter mCityAdapter;
-    cn.mysilicon.housekeep.activities.AreaAdapter mAreaAdapter;
+    AreaAdapter mAreaAdapter;
     String province, city, area;
     CityInfoBean mCityInfoBean;
     TextView mTvProvince;
@@ -86,7 +90,7 @@ public class JDCityPicker extends PopupWindow {
         }
         this.setAnimationStyle(R.style.PopupWindow);
 
-        String data =  cn.mysilicon.housekeep.activities.JsonParser.getJson(context, "city.json");
+        String data =  cn.mysilicon.housekeep.utils.JsonParser.getJson(context, "city.json");
         JsonParser jsonParser = new JsonParser();
         JsonArray jsonElements = jsonParser.parse(data).getAsJsonArray();//获取JsonArray对象
         beans = new ArrayList<>();
@@ -204,12 +208,12 @@ public class JDCityPicker extends PopupWindow {
         mRvProvince.setVisibility(View.GONE);
         mRvCity.setVisibility(View.GONE);
         mRvArea.setVisibility(View.VISIBLE);
-        mAreaAdapter = new cn.mysilicon.housekeep.activities.AreaAdapter(areaList);
+        mAreaAdapter = new AreaAdapter(areaList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         mRvArea.setLayoutManager(linearLayoutManager);
         mRvArea.setAdapter(mAreaAdapter);
-        mAreaAdapter.setOnItemListener(new cn.mysilicon.housekeep.activities.AreaAdapter.onItemClick() {
+        mAreaAdapter.setOnItemListener(new AreaAdapter.onItemClick() {
             @Override
             public void onClick(int position, String name) {
                 if (TextUtils.isEmpty(area)) {

@@ -1,4 +1,4 @@
-package cn.mysilicon.housekeep.activities;
+package cn.mysilicon.housekeep.utils;
 
 import android.app.Activity;
 import android.content.Context;

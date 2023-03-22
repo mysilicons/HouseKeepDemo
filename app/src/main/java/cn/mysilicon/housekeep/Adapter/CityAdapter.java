@@ -1,4 +1,4 @@
-package cn.mysilicon.housekeep.activities;
+package cn.mysilicon.housekeep.Adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +14,7 @@ import java.util.List;
 import cn.mysilicon.housekeep.R;
 
 
-public class ProvinceAdapter extends RecyclerView.Adapter<ProvinceAdapter.ViewHolder> {
+public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
     List<String> dataList;
     int selection = -1;
 
@@ -24,7 +24,7 @@ public class ProvinceAdapter extends RecyclerView.Adapter<ProvinceAdapter.ViewHo
         this.itemClick = itemClick;
     }
 
-    public ProvinceAdapter(List<String> list) {
+    public CityAdapter(List<String> list) {
         this.dataList = list;
     }
 

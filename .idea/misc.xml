@@ -5,12 +5,15 @@
       <map>
         <entry key="..\:/Users/GW/Desktop/code/HouseKeep/app/src/main/res/drawable/back.xml" value="0.334" />
         <entry key="..\:/Users/GW/Desktop/code/HouseKeep/app/src/main/res/drawable/buttonstyle.xml" value="0.309" />
+        <entry key="..\:/Users/GW/Desktop/code/HouseKeep/app/src/main/res/layout/activity_address_manager.xml" value="0.1" />
         <entry key="..\:/Users/GW/Desktop/code/HouseKeep/app/src/main/res/layout/activity_city_list.xml" value="0.2817028985507246" />
         <entry key="..\:/Users/GW/Desktop/code/HouseKeep/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/GW/Desktop/code/HouseKeep/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/GW/Desktop/code/HouseKeep/app/src/main/res/layout/activity_person.xml" value="0.33" />
         <entry key="..\:/Users/GW/Desktop/code/HouseKeep/app/src/main/res/layout/activity_register.xml" value="0.1" />
         <entry key="..\:/Users/GW/Desktop/code/HouseKeep/app/src/main/res/layout/activity_settings.xml" value="0.25679347826086957" />
+        <entry key="..\:/Users/GW/Desktop/code/HouseKeep/app/src/main/res/layout/adress_item.xml" value="0.25905797101449274" />
+        <entry key="..\:/Users/GW/Desktop/code/HouseKeep/app/src/main/res/layout/back.xml" value="0.17603850050658562" />
         <entry key="..\:/Users/GW/Desktop/code/HouseKeep/app/src/main/res/layout/city_list_grid_item_layout.xml" value="0.2817028985507246" />
         <entry key="..\:/Users/GW/Desktop/code/HouseKeep/app/src/main/res/layout/city_list_item_layout.xml" value="0.2817028985507246" />
         <entry key="..\:/Users/GW/Desktop/code/HouseKeep/app/src/main/res/layout/fragment_1.xml" value="0.13703703703703704" />
@@ -18,7 +21,7 @@
         <entry key="..\:/Users/GW/Desktop/code/HouseKeep/app/src/main/res/layout/overlay.xml" value="0.2817028985507246" />
         <entry key="..\:/Users/GW/Desktop/code/HouseKeep/app/src/main/res/layout/recent_city_item.xml" value="0.2817028985507246" />
         <entry key="..\:/Users/GW/Desktop/code/HouseKeep/app/src/main/res/layout/select_city_location_item.xml" value="0.33" />
-        <entry key="..\:/Users/GW/Desktop/code/HouseKeep/app/src/main/res/layout/test.xml" value="0.25679347826086957" />
+        <entry key="..\:/Users/GW/Desktop/code/HouseKeep/app/src/main/res/layout/test.xml" value="0.1" />
         <entry key="..\:/Users/GW/Desktop/code/HouseKeep/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1215" />
       </map>
     </option>

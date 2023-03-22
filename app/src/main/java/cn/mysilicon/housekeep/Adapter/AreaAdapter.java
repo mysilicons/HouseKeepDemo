@@ -1,4 +1,4 @@
-package cn.mysilicon.housekeep.activities;
+package cn.mysilicon.housekeep.Adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;

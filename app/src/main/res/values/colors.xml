@@ -19,4 +19,9 @@
     <color name="mainColor">#6BC8EC</color>
     <color name="light_main">#94D9F4</color>
     <color name="line">#E5E5E5</color>
+    <color name="primary_color">#1976D2</color>
+    <color name="primary_dark_color">#0D47A1</color>
+    <color name="accent_color">#FF4081</color>
+    <color name="primary_text_color">#212121</color>
+    <color name="secondary_text_color">#757575</color>
 </resources>
