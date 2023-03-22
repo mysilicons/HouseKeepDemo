@@ -14,5 +14,9 @@
         <item name="android:layout_height">1px</item>
         <item name="android:background">@color/line</item>
     </style>
-
+    <!--弹窗动画-->
+    <style name="PopupWindow">
+        <item name="android:windowEnterAnimation">@anim/window_in</item>
+        <item name="android:windowExitAnimation">@anim/window_out</item>
+    </style>
 </resources>

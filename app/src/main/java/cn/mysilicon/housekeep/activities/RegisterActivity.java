@@ -1,8 +1,10 @@
 package cn.mysilicon.housekeep.activities;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -30,17 +32,21 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText edt_password;
     private Button goLogin;
     private Button submit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        edt_username=findViewById(R.id.edt_register_username);
-        edt_password=findViewById(R.id.edt_register_password);
-        goLogin=findViewById(R.id.btn_goLogin);
-        submit=findViewById(R.id.btn_submit);
+        edt_username = findViewById(R.id.edt_register_username);
+        edt_password = findViewById(R.id.edt_register_password);
+        goLogin = findViewById(R.id.btn_goLogin);
+        submit = findViewById(R.id.btn_submit);
         //透明状态栏          
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+
+        edt_password.setTransformationMethod(PasswordTransformationMethod
+                .getInstance());
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,22 +54,23 @@ public class RegisterActivity extends AppCompatActivity {
                 String username = edt_username.getText().toString().trim();
                 String password = edt_password.getText().toString().trim();
 
+
                 goLogin.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
+                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                         startActivity(intent);
                         finish();
                     }
                 });
 
-                if(username.equals("")||password.equals("")){
+                if (username.equals("") || password.equals("")) {
                     Toast.makeText(RegisterActivity.this, "请填写完整", Toast.LENGTH_SHORT).show();
-                }else {
-                    JSONObject jsonObject=new JSONObject();
+                } else {
+                    JSONObject jsonObject = new JSONObject();
                     try {
-                        jsonObject.put("uname",username);
-                        jsonObject.put("pwd",password);
+                        jsonObject.put("uname", username);
+                        jsonObject.put("pwd", password);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -73,43 +80,44 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(RegisterActivity.this, "手机号应为11位数", Toast.LENGTH_SHORT).show();
                     }
                     Boolean mathResult = isPhone(username);
-                    if (mathResult ==false) {
+                    if (username.length() != 11 && mathResult == false) {
                         Toast.makeText(RegisterActivity.this, "手机号格式有误", Toast.LENGTH_SHORT).show();
-                    }
+                    } else {
 
-                    String url="http://8.130.79.158/api/register";
-                    RequestQueue requestQueue=Volley.newRequestQueue(RegisterActivity.this);
-                    JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(Request.Method.POST, url,jsonObject, new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject jsonObject) {
-                            try {
-                                Log.d("注册信息", jsonObject.toString());
-                                String msg = jsonObject.getString("msg");
-                                if(msg.equals("操作成功")){
-                                    Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
-                                    Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                }else {
-                                    String token = jsonObject.getString("token");
-                                    Toast.makeText(RegisterActivity.this, token, Toast.LENGTH_SHORT).show();
-                                    if (token.equals("用户已存在")) {
-                                        Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
+                        String url = "http://8.130.79.158/api/register";
+                        RequestQueue requestQueue = Volley.newRequestQueue(RegisterActivity.this);
+                        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject jsonObject) {
+                                try {
+                                    Log.d("注册信息", jsonObject.toString());
+                                    String msg = jsonObject.getString("msg");
+                                    if (msg.equals("操作成功")) {
+                                        Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                         startActivity(intent);
                                         finish();
+                                    } else {
+                                        String token = jsonObject.getString("token");
+                                        Toast.makeText(RegisterActivity.this, token, Toast.LENGTH_SHORT).show();
+                                        if (token.equals("用户已存在")) {
+                                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
                                     }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
                                 }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
                             }
-                        }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError volleyError) {
-                            Toast.makeText(RegisterActivity.this, "网络出错", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    requestQueue.add(jsonObjectRequest);
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError volleyError) {
+                                Toast.makeText(RegisterActivity.this, "网络出错", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        requestQueue.add(jsonObjectRequest);
+                    }
                 }
             }
         });
@@ -117,13 +125,13 @@ public class RegisterActivity extends AppCompatActivity {
         goLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(RegisterActivity.this,MainActivity.class));
+                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
             }
         });
     }
 
     public static boolean isPhone(String phone) {
-        String regex = "^((13[0-9])|(14[5,7,9])|(15([0-3]|[5-9]))|(166)|(17[0,1,3,5,6,7,8])|(18[0-9])|(19[8|9]))\\d{8}$";
+        String regex = "^(13[0-9]|14[579]|15[0-35-9]|16[6]|17[0135678]|18[0-9]|19[89])\\d{8}$";
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(phone);
         boolean isMatch = m.matches();

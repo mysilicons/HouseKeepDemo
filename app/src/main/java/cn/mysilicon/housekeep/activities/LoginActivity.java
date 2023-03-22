@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -58,6 +59,9 @@ public class LoginActivity extends AppCompatActivity {
         String username1 = intent.getStringExtra("username1");
         login_username.setText(username1);
 
+        login_password.setTransformationMethod(PasswordTransformationMethod
+                .getInstance());
+
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(JSONObject jsonObject) {
                             try {
-                                Log.d("信心", jsonObject.toString());
+                                Log.d("服务端返回信息", jsonObject.toString());
                                 String msg = jsonObject.getString("msg");
                                 Log.d("msg", msg);
                                 if (msg.equals("操作成功")) {
