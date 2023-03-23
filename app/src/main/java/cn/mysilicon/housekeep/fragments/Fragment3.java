@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import cn.mysilicon.housekeep.R;
 import cn.mysilicon.housekeep.activities.AfterSaleActivity;
+import cn.mysilicon.housekeep.activities.CollectActivity;
 import cn.mysilicon.housekeep.activities.LoginActivity;
 import cn.mysilicon.housekeep.activities.MainActivity;
 import cn.mysilicon.housekeep.activities.OrderActivity;
@@ -80,6 +81,7 @@ public class Fragment3 extends Fragment {
         super.onActivityCreated(savedInstanceState);
         TextView person_info = (TextView) getActivity().findViewById(R.id.person_info);
         TextView my_order = (TextView) getActivity().findViewById(R.id.my_order);
+        TextView my_collect = (TextView) getActivity().findViewById(R.id.my_collect);
         TextView settings = (TextView) getActivity().findViewById(R.id.settings);
         TextView after_sale = (TextView) getActivity().findViewById(R.id.after_sale);
         TextView logout = (TextView) getActivity().findViewById(R.id.logout);
@@ -98,6 +100,15 @@ public class Fragment3 extends Fragment {
             public void onClick(View v) {
                 //跳转到我的订单页面
                 Intent intent = new Intent(getActivity(), OrderActivity.class);
+                startActivity(intent);
+            }
+        });
+        //点击我的收藏
+        my_collect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //跳转到我的收藏页面
+                Intent intent = new Intent(getActivity(), CollectActivity.class);
                 startActivity(intent);
             }
         });
