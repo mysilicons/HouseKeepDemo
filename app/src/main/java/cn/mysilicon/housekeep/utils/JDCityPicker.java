@@ -28,7 +28,7 @@ import cn.mysilicon.housekeep.Adapter.AreaAdapter;
 import cn.mysilicon.housekeep.Adapter.CityAdapter;
 import cn.mysilicon.housekeep.Adapter.ProvinceAdapter;
 import cn.mysilicon.housekeep.R;
-import cn.mysilicon.housekeep.activities.CityInfoBean;
+import cn.mysilicon.housekeep.model.CityInfoBean;
 
 /**
  * 作者：Allen

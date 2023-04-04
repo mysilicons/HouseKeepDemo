@@ -1,4 +1,4 @@
-package cn.mysilicon.housekeep.activities;
+package cn.mysilicon.housekeep.model;
 
 import java.util.List;
 
