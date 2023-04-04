@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/home">
+
+    <fragment
+        android:id="@+id/home"
+        android:name="cn.mysilicon.housekeep.fragments.Fragment1"
+        android:label="主页"
+        tools:layout="@layout/fragment_1" />
+
+    <fragment
+        android:id="@+id/classification"
+        android:name="cn.mysilicon.housekeep.fragments.Fragment2"
+        android:label="分类"
+        tools:layout="@layout/fragment_2" />
+
+    <fragment
+        android:id="@+id/message"
+        android:name="cn.mysilicon.housekeep.fragments.Fragment3"
+        android:label="消息"
+        tools:layout="@layout/fragment_3" />
+
+    <fragment
+        android:id="@+id/my"
+        android:name="cn.mysilicon.housekeep.fragments.Fragment4"
+        android:label="我的"
+        tools:layout="@layout/fragment_4" />
+</navigation>

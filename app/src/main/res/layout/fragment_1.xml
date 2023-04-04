@@ -12,6 +12,6 @@
         android:layout_height="wrap_content"
         android:text="城市"
         android:onClick="btn_city_onClick" />
-        />
+
 
 </FrameLayout>

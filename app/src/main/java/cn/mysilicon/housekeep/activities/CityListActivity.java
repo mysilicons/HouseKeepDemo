@@ -109,6 +109,10 @@ public class CityListActivity extends AppCompatActivity implements AbsListView.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        city = intent.getStringExtra("City");
+        locationCity=city;
+        Log.d("传过来的city",city);
         // 默认软键盘不弹出
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         setSystemBarTransparent();
@@ -375,12 +379,12 @@ public class CityListActivity extends AppCompatActivity implements AbsListView.O
                 curCityNameTv = convertView.findViewById(R.id.cur_city_name_tv);
                 TextView reGetLocationTv = convertView.findViewById(R.id.re_get_location_tv);
                 Button backBtn = findViewById(R.id.back_btn);
-
                 backBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent();	// 构建了一个intent，仅用来传递数据
                         intent.putExtra("City", locationCity); // 存储要返回到上一个activity的数据
+                        //TODO
                         setResult(RESULT_OK, intent);    // 设置返回码和返回数据
                         finish();
                     }
@@ -391,8 +395,6 @@ public class CityListActivity extends AppCompatActivity implements AbsListView.O
                     public void onClick(View v) {
                         //获取定位
                         locationCity = city;
-                        //Log.d("City", city);
-                        //Log.d("locationCity", locationCity);
                         noLocationLl.setVisibility(View.GONE);
                         curCityNameTv.setVisibility(View.VISIBLE);
                         reGetLocationTv.setVisibility(View.VISIBLE);
@@ -409,8 +411,6 @@ public class CityListActivity extends AppCompatActivity implements AbsListView.O
                         public void onClick(View v) {
                             //获取定位
                             locationCity = city;
-                            Log.d("City", city);
-                            //Log.d("locationCity", locationCity);
                             noLocationLl.setVisibility(View.GONE);
                             curCityNameTv.setVisibility(View.VISIBLE);
                             reGetLocationTv.setVisibility(View.VISIBLE);

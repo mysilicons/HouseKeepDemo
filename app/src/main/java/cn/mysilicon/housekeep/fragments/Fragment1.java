@@ -96,6 +96,8 @@ public class Fragment1 extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), CityListActivity.class);
+                intent.putExtra("City", City);
+                Log.d("传过去的city", City);
                 startActivityForResult(intent, 1);
             }
         });

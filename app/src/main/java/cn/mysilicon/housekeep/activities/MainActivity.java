@@ -6,12 +6,21 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -25,14 +34,13 @@ import cn.mysilicon.housekeep.R;
 import cn.mysilicon.housekeep.fragments.Fragment1;
 import cn.mysilicon.housekeep.fragments.Fragment2;
 import cn.mysilicon.housekeep.fragments.Fragment3;
+import cn.mysilicon.housekeep.fragments.Fragment4;
 
 
 public class MainActivity extends AppCompatActivity {
     private String City;
-
     public static final int LOCATION_PERMISSION_REQUEST_CODE = 200;
-    FragmentManager fragmentManager = getSupportFragmentManager();
-    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,36 +67,42 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         City = loadCity();
-        Fragment1 fragment1 = new Fragment1();
         //传递数据
         Bundle bundle = new Bundle();
         bundle.putString("City", City);
-        //Log.d("City", City);
-        fragment1.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction().replace(R.id.replace, fragment1).commit();
+
+
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.home, R.id.classification, R.id.message, R.id.my)
+                .build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(navView, navController);
     }
 
 
     //Fragment互相切换
-    public void buttonClick(View view) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        Fragment1 fragment1 = new Fragment1();
-        Fragment2 fragment2 = new Fragment2();
-        Fragment3 fragment3 = new Fragment3();
-        switch (view.getId()) {
-            case R.id.button1:
-                fragmentTransaction.replace(R.id.replace, fragment1);
-                break;
-            case R.id.button2:
-                fragmentTransaction.replace(R.id.replace, fragment2);
-                break;
-            case R.id.button3:
-                fragmentTransaction.replace(R.id.replace, fragment3);
-                break;
-        }
-        fragmentTransaction.commit();
-    }
+
+//    public void buttonClick(View view) {
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        Fragment1 fragment1 = new Fragment1();
+//        Fragment2 fragment2 = new Fragment2();
+//        Fragment4 fragment4 = new Fragment4();
+//        switch (view.getId()) {
+//            case R.id.button1:
+//                fragmentTransaction.replace(R.id.replace, fragment1);
+//                break;
+//            case R.id.button2:
+//                fragmentTransaction.replace(R.id.replace, fragment2);
+//                break;
+//            case R.id.button3:
+//                fragmentTransaction.replace(R.id.replace, fragment4);
+//                break;
+//        }
+//        fragmentTransaction.commit();
+//    }
 
     //获取位置
     private String loadCity() {
