@@ -85,7 +85,7 @@ public class Fragment1 extends Fragment {
         //接收数据
         Bundle bundle = getArguments();
         //City = bundle.getString("city");
-        String City = loadCity();
+        City = loadCity();
         Button btn = (Button) getActivity().findViewById(R.id.btn_city);
         if (City != null) {
             btn.setText(City);
@@ -97,7 +97,7 @@ public class Fragment1 extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), CityListActivity.class);
                 intent.putExtra("City", City);
-                Log.d("传过去的city", City);
+//                Log.d("传过去的city", City);
                 startActivityForResult(intent, 1);
             }
         });

@@ -11,14 +11,16 @@
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/item_album"
-            android:layout_width="85dp"
-            android:layout_height="85dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
             android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/item_home_name"
-            android:layout_width="50dp"
+            android:layout_width="65dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center"

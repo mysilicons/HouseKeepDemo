@@ -1,17 +1,20 @@
 package cn.mysilicon.housekeep.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
 
 import cn.mysilicon.housekeep.R;
+import cn.mysilicon.housekeep.activities.ServicesActivity;
 import cn.mysilicon.housekeep.model.CategoryBean;
 
 /**
@@ -68,9 +71,16 @@ public class HomeItemAdapter extends BaseAdapter {
         viewHold.tv_name.setText(subcategory.getTitle());
         Uri uri = Uri.parse(subcategory.getImgURL());
         viewHold.iv_icon.setImageURI(uri);
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //跳转到服务页面
+                Intent intent = new Intent(context, ServicesActivity.class);
+                context.startActivity(intent);
+                // Toast.makeText(context, "点击了" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
         return convertView;
-
-
     }
 
     private static class ViewHold {

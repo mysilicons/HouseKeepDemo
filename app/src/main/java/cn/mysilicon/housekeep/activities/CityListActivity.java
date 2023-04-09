@@ -112,7 +112,9 @@ public class CityListActivity extends AppCompatActivity implements AbsListView.O
         Intent intent = getIntent();
         city = intent.getStringExtra("City");
         locationCity=city;
-        Log.d("传过来的city",city);
+//        Log.d("传过来的city",city);
+        //保存到本地
+        saveLocationCity();
         // 默认软键盘不弹出
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         setSystemBarTransparent();
@@ -128,6 +130,7 @@ public class CityListActivity extends AppCompatActivity implements AbsListView.O
         initListener();
 
     }
+
 
     private void initView() {
         ViewBinder.bind(this);
@@ -629,7 +632,7 @@ public class CityListActivity extends AppCompatActivity implements AbsListView.O
                 PixelFormat.TRANSLUCENT);
         WindowManager windowManager = (WindowManager) this
                 .getSystemService(Context.WINDOW_SERVICE);
-        windowManager.addView(overlay, lp);
+//        windowManager.addView(overlay, lp);
     }
 
 
@@ -698,8 +701,6 @@ public class CityListActivity extends AppCompatActivity implements AbsListView.O
                 //刷新数据
                 initData();
                 saveLocationCity();
-
-
             }
         });
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() { //设置取消按钮
@@ -801,6 +802,7 @@ public class CityListActivity extends AppCompatActivity implements AbsListView.O
         } finally {
             try {
                 if (cityWriter != null) {
+//                    Log.d("city", "saveLocationCity: " + locationCity);
                     cityWriter.close();
                 }
             } catch (IOException e) {
