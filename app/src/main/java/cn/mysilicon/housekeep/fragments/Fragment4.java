@@ -3,6 +3,7 @@ package cn.mysilicon.housekeep.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,11 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import java.util.Objects;
+import android.widget.Toast;
 
 import cn.mysilicon.housekeep.R;
-import cn.mysilicon.housekeep.activities.AfterSaleActivity;
 import cn.mysilicon.housekeep.activities.CollectActivity;
 import cn.mysilicon.housekeep.activities.LoginActivity;
 import cn.mysilicon.housekeep.activities.OrderActivity;
@@ -112,7 +111,9 @@ public class Fragment4 extends Fragment {
         //点击售后
         after_sale.setOnClickListener(v -> {
             //跳转到售后页面
-            Intent intent = new Intent(getActivity(), AfterSaleActivity.class);
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse("tel:028-88888888"));
+            Toast.makeText(getActivity(), "请拨打售后客服电话：028-88888888", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         });
         //点击退出登录
