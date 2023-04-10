@@ -37,7 +37,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation 'com.google.code.gson:gson:2.8.9'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.squareup.okhttp3:okhttp:4.1.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
     implementation 'com.alibaba:fastjson:1.1.54.android'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //Gson解析

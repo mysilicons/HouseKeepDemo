@@ -3,6 +3,9 @@ package cn.mysilicon.housekeep.activities;
 import static android.os.SystemClock.sleep;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -43,7 +46,7 @@ import okhttp3.Response;
  */
 public class CollectActivity extends AppCompatActivity implements GoodsCallback, View.OnClickListener {
 
-    public static final String TAG = "MainActivity";
+    public static final String TAG = "CollectActivity";
 
     private RecyclerView rvStore;
     private StoreAdapter storeAdapter;
@@ -89,15 +92,7 @@ public class CollectActivity extends AppCompatActivity implements GoodsCallback,
             actionBar.setHomeButtonEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
-
         getData();
-        sleep(100);
-        try {
-            initView();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 
@@ -123,35 +118,44 @@ public class CollectActivity extends AppCompatActivity implements GoodsCallback,
      * 获取数据
      */
     private void getData() {
-        //TODO
-        //请求数据
-        String result = null;
-        OkHttpClient client = new OkHttpClient();
-
-        Request request = new Request.Builder()
-                .url("http://8.130.79.158/orders")
-                .get()
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
+        new Thread(new Runnable() {
             @Override
-            public void onFailure(Call call, IOException e) {
-                // 请求失败
-                Log.d(TAG, "onFailure: " + e.getMessage());
-
+            public void run() {
+                OkHttpClient client = new OkHttpClient();
+                Request request = new Request.Builder()
+                        .url("http://8.130.79.158/orders")
+                        .get()
+                        .build();
+                Call call = client.newCall(request);
+                try {
+                    Response response = call.execute();
+                    String result = response.body().string();
+                    // 请求成功，处理结果
+                    Log.d(TAG, "onResponse: " + result);
+                    Gson gson = new Gson();
+                    carResponse = gson.fromJson(result, CarResponse.class);
+                    handler.sendEmptyMessage(0);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String result = response.body().string();
-                // 请求成功，处理结果
-                Log.d(TAG, "onResponse: " + result);
-                Gson gson = new Gson();
-                carResponse = gson.fromJson(result, CarResponse.class);
-            }
-        });
-
+        }).start();
     }
+
+    private final Handler handler = new Handler(Looper.getMainLooper()) {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == 0) {//完成主界面更新,拿到数据
+                try {
+                    initView();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    };
+
     /**
      * 初始化
      */
@@ -189,8 +193,6 @@ public class CollectActivity extends AppCompatActivity implements GoodsCallback,
         tvCollectGoods.setOnClickListener(this);
         tvDeleteGoods.setOnClickListener(this);
 
-        getData();
-        sleep(100);
         Log.d(TAG, "initView: " + carResponse.toString());
         mList.addAll(carResponse.getOrderData());
         storeAdapter = new StoreAdapter(R.layout.item_store, mList, this);
