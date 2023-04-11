@@ -3,6 +3,7 @@ package cn.mysilicon.housekeep.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -26,6 +27,7 @@ import cn.mysilicon.housekeep.model.CategoryBean;
 
 public class HomeItemAdapter extends BaseAdapter {
 
+    private static final String TAG = "HomeItemAdapter";
     private Context context;
     private List<CategoryBean.DataBean.DataListBean> foodDatas;
 
@@ -74,8 +76,11 @@ public class HomeItemAdapter extends BaseAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String categoryID = subcategory.getId();
+                Log.d(TAG,categoryID);
                 //跳转到服务页面
                 Intent intent = new Intent(context, ServicesActivity.class);
+                intent.putExtra("categoryID",categoryID);
                 context.startActivity(intent);
                 // Toast.makeText(context, "点击了" + position, Toast.LENGTH_SHORT).show();
             }

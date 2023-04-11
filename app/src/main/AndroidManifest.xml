@@ -19,6 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
+            android:name=".activities.DetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.ServicesActivity"
             android:exported="false" />
         <activity

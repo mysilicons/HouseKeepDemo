@@ -1,7 +1,5 @@
 package cn.mysilicon.housekeep.activities;
 
-import static android.os.SystemClock.sleep;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -34,7 +32,6 @@ import cn.mysilicon.housekeep.R;
 import cn.mysilicon.housekeep.model.CarResponse;
 import cn.mysilicon.housekeep.utils.GoodsCallback;
 import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;

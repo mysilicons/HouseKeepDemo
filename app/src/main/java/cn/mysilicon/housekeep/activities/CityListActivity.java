@@ -387,7 +387,6 @@ public class CityListActivity extends AppCompatActivity implements AbsListView.O
                     public void onClick(View v) {
                         Intent intent = new Intent();	// 构建了一个intent，仅用来传递数据
                         intent.putExtra("City", locationCity); // 存储要返回到上一个activity的数据
-                        //TODO
                         setResult(RESULT_OK, intent);    // 设置返回码和返回数据
                         finish();
                     }
