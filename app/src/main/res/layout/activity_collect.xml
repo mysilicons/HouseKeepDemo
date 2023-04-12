@@ -162,31 +162,6 @@
             android:visibility="gone">
 
             <TextView
-                android:id="@+id/tv_share_goods"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.3"
-                android:background="#f4c600"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:gravity="center"
-                android:text="分享宝贝"
-                android:textColor="@android:color/white"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/tv_collect_goods"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="1dp"
-                android:layout_weight="0.3"
-                android:background="#ea8010"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:gravity="center"
-                android:text="移到收藏夹"
-                android:textColor="@android:color/white"
-                android:textSize="16sp" />
-
-            <TextView
                 android:id="@+id/tv_delete_goods"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
