@@ -1,5 +1,13 @@
 package cn.mysilicon.housekeep.activities;
 
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -7,17 +15,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-
 import com.alibaba.fastjson.JSONArray;
-import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,7 +23,6 @@ import java.util.List;
 
 import cn.mysilicon.housekeep.Adapter.SearchResultAdapter;
 import cn.mysilicon.housekeep.R;
-import cn.mysilicon.housekeep.model.AddressMatch;
 import cn.mysilicon.housekeep.model.ServiceItemBean;
 import okhttp3.Call;
 import okhttp3.OkHttpClient;

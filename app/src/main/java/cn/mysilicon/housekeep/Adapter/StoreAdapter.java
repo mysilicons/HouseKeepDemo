@@ -1,7 +1,11 @@
 package cn.mysilicon.housekeep.Adapter;
 
+import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,6 +17,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import java.util.List;
 
 import cn.mysilicon.housekeep.R;
+import cn.mysilicon.housekeep.activities.DetailsActivity;
 import cn.mysilicon.housekeep.model.CarResponse;
 import cn.mysilicon.housekeep.utils.GoodsCallback;
 
@@ -37,7 +42,6 @@ public class StoreAdapter extends BaseQuickAdapter<CarResponse.OrderDataBean, Ba
 
     @Override
     protected void convert(BaseViewHolder helper, final CarResponse.OrderDataBean item) {
-
         rvGood = helper.getView(R.id.rv_goods);
         helper.setText(R.id.tv_store_name, item.getShopName());
 
@@ -60,7 +64,6 @@ public class StoreAdapter extends BaseQuickAdapter<CarResponse.OrderDataBean, Ba
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 CarResponse.OrderDataBean.CartlistBean goodsBean = item.getCartlist().get(position);
-
                 switch (view.getId()) {
                     case R.id.iv_checked_goods://选中商品
                         //如果已选中则取消选中，未选中则选中
@@ -78,6 +81,13 @@ public class StoreAdapter extends BaseQuickAdapter<CarResponse.OrderDataBean, Ba
             }
         });
 
+    }
+
+    private void jumpGoodsDetail(int productId) {
+        //跳转到商品详情
+        Intent intent = new Intent(mContext, DetailsActivity.class);
+        intent.putExtra("id", productId);
+        mContext.startActivity(intent);
     }
 
     /**

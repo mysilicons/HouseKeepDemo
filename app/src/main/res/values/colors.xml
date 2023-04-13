@@ -38,4 +38,5 @@
     <color name="transparent">#00000000</color>
     <color name="green">#FF34A350</color>
     <color name="ic_launcher_background">#FFFFFF</color>
+    <color name="common_orange">#fc7946</color>
 </resources>
