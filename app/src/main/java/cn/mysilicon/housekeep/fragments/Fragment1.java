@@ -2,22 +2,42 @@ package cn.mysilicon.housekeep.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.alibaba.fastjson.JSONArray;
+import com.youth.banner.Banner;
+import com.youth.banner.listener.OnBannerListener;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
+import cn.mysilicon.housekeep.Adapter.HomePageAdapter;
 import cn.mysilicon.housekeep.R;
 import cn.mysilicon.housekeep.activities.CityListActivity;
+import cn.mysilicon.housekeep.activities.MainActivity;
+import cn.mysilicon.housekeep.model.ServiceItemBean;
+import cn.mysilicon.housekeep.utils.BannerLoaderUtil;
+import okhttp3.Call;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +45,9 @@ import cn.mysilicon.housekeep.activities.CityListActivity;
  * create an instance of this fragment.
  */
 public class Fragment1 extends Fragment {
+    private List<ServiceItemBean> ServiceItemBeanList = new ArrayList<>();
+    private RecyclerView mHomePageRecyclerView;
+    private HomePageAdapter mHomePageAdapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -97,8 +120,91 @@ public class Fragment1 extends Fragment {
                 startActivityForResult(intent, 1);
             }
         });
+        getImages();
+        getData();
 
     }
+
+    private void initView() {
+        Banner banner = getActivity().findViewById(R.id.banner);
+
+        List images = new ArrayList();
+        images.add("https://image14.m1905.cn/uploadfile/2018/0907/thumb_1_1380_460_20180907013518839623.jpg");
+        images.add("https://image14.m1905.cn/uploadfile/2018/0906/thumb_1_1380_460_20180906040153529630.jpg");
+        images.add("https://image13.m1905.cn/uploadfile/2018/0907/thumb_1_1380_460_20180907114844929630.jpg");
+
+        //设置图片加载器
+        banner.setImageLoader(new BannerLoaderUtil());
+        //设置图片集合
+        banner.setImages(images);
+        //banner设置方法全部调用完毕时最后调用
+        banner.start();
+        //增加点击事件
+        banner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                Toast.makeText(getActivity(), "你点击了：" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        mHomePageAdapter = new HomePageAdapter(ServiceItemBeanList, getActivity());
+        mHomePageRecyclerView = getActivity().findViewById(R.id.home_page_rv);
+        mHomePageRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mHomePageRecyclerView.setAdapter(new HomePageAdapter(ServiceItemBeanList, getActivity()));
+
+
+    }
+
+    private final Handler handler = new Handler(Looper.getMainLooper()) {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == 0) {//完成主界面更新,拿到数据
+                initView();
+            }
+        }
+    };
+
+    private void getImages() {
+
+    }
+
+    private void getData() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // 创建OkHttpClient对象
+                OkHttpClient client = new OkHttpClient();
+
+                // 创建Request对象
+                Request request = new Request.Builder()
+                        .url("http://8.130.79.158/service/all")
+                        .get()
+                        .build();
+                Call call = client.newCall(request);
+                try {
+                    Response response = call.execute();
+                    String result = response.body().string();
+                    // 请求成功，处理结果
+                    JSONArray jsonArray = JSONArray.parseArray(result);
+                    for (int i = 0; i < jsonArray.size(); i++) {
+                        ServiceItemBean serviceItemBean = new ServiceItemBean();
+                        serviceItemBean.setId(jsonArray.getJSONObject(i).getInteger("id"));
+                        serviceItemBean.setClassification(jsonArray.getJSONObject(i).getInteger("classification"));
+                        serviceItemBean.setURL(jsonArray.getJSONObject(i).getString("image_url"));
+                        serviceItemBean.setTitle(jsonArray.getJSONObject(i).getString("title"));
+                        serviceItemBean.setContent(jsonArray.getJSONObject(i).getString("content"));
+                        serviceItemBean.setPrice(jsonArray.getJSONObject(i).getString("price"));
+                        ServiceItemBeanList.add(serviceItemBean);
+                    }
+                    handler.sendEmptyMessage(0);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
