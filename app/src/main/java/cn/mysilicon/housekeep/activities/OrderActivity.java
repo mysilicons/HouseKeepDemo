@@ -1,12 +1,5 @@
 package cn.mysilicon.housekeep.activities;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.OrientationHelper;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -14,22 +7,25 @@ import android.os.Message;
 import android.util.Log;
 import android.view.MenuItem;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.OrientationHelper;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
-
-import org.json.JSONStringer;
 
 import java.io.IOException;
 import java.util.List;
 
 import cn.mysilicon.housekeep.Adapter.OrderAdapter;
 import cn.mysilicon.housekeep.R;
-import cn.mysilicon.housekeep.model.CarResponse;
 import cn.mysilicon.housekeep.model.Order;
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class OrderActivity extends AppCompatActivity {

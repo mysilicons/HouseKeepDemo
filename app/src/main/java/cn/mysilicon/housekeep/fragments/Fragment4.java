@@ -19,7 +19,6 @@ import cn.mysilicon.housekeep.activities.CollectActivity;
 import cn.mysilicon.housekeep.activities.LoginActivity;
 import cn.mysilicon.housekeep.activities.OrderActivity;
 import cn.mysilicon.housekeep.activities.PersonActivity;
-import cn.mysilicon.housekeep.activities.SettingsActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -81,7 +80,6 @@ public class Fragment4 extends Fragment {
         TextView person_info = requireActivity().findViewById(R.id.person_info);
         TextView my_order = requireActivity().findViewById(R.id.my_order);
         TextView my_collect = requireActivity().findViewById(R.id.my_collect);
-        TextView settings = requireActivity().findViewById(R.id.settings);
         TextView after_sale = requireActivity().findViewById(R.id.after_sale);
         TextView logout = requireActivity().findViewById(R.id.logout);
         //点击个人信息
@@ -100,12 +98,6 @@ public class Fragment4 extends Fragment {
         my_collect.setOnClickListener(v -> {
             //跳转到我的收藏页面
             Intent intent = new Intent(getActivity(), CollectActivity.class);
-            startActivity(intent);
-        });
-        //点击设置
-        settings.setOnClickListener(v -> {
-            //跳转到设置页面
-            Intent intent = new Intent(getActivity(), SettingsActivity.class);
             startActivity(intent);
         });
         //点击售后

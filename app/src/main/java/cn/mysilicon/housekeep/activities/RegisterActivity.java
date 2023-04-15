@@ -41,7 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
         edt_password = findViewById(R.id.edt_register_password);
         goLogin = findViewById(R.id.btn_goLogin);
         submit = findViewById(R.id.btn_submit);
-        //透明状态栏          
+        //透明状态栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
 

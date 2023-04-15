@@ -2,17 +2,14 @@ package cn.mysilicon.housekeep.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -21,7 +18,6 @@ import java.io.InputStreamReader;
 
 import cn.mysilicon.housekeep.R;
 import cn.mysilicon.housekeep.activities.CityListActivity;
-import cn.mysilicon.housekeep.activities.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.

@@ -33,7 +33,6 @@ import cn.mysilicon.housekeep.R;
 import cn.mysilicon.housekeep.model.CarResponse;
 import cn.mysilicon.housekeep.utils.GoodsCallback;
 import okhttp3.Call;
-import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -158,14 +157,14 @@ public class CollectActivity extends AppCompatActivity implements GoodsCallback,
                 if (view.getId() == R.id.iv_checked_store) {
                     storeBean.setChecked(!storeBean.isChecked());
                     storeAdapter.notifyDataSetChanged();
-                    //传递选中店铺的id
+                    //传递选中的id
                     if (storeBean.isChecked()) {
                         //全选服务
                         storeAdapter.controlGoods(storeBean.getShopId(), true);
 
                         //添加到列表中
                         if (!shopIdList.contains(storeBean.getShopId())) {
-                            //如果列表中没有这个店铺Id且当前店铺为选中状态
+                            //如果列表中没有这个Id且当前分类为选中状态
                             shopIdList.add(storeBean.getShopId());
                         }
                     } else {

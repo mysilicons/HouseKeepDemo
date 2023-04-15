@@ -1,11 +1,8 @@
 package cn.mysilicon.housekeep.Adapter;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;

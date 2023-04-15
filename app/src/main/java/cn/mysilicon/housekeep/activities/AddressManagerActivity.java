@@ -2,15 +2,10 @@ package cn.mysilicon.housekeep.activities;
 
 import static android.os.SystemClock.sleep;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.telecom.Call;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -23,6 +18,10 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -31,7 +30,6 @@ import cn.mysilicon.housekeep.R;
 import cn.mysilicon.housekeep.model.Address;
 import cn.mysilicon.housekeep.utils.JDCityPicker;
 import okhttp3.Callback;
-import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;

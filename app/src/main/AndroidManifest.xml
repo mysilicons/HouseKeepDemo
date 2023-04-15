@@ -34,9 +34,6 @@
             android:name=".activities.AddressManagerActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.SettingsActivity"
-            android:exported="false" />
-        <activity
             android:name=".activities.OrderActivity"
             android:exported="false" />
         <activity
