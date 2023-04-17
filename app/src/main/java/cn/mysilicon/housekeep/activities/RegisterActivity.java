@@ -84,7 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(RegisterActivity.this, "手机号格式有误", Toast.LENGTH_SHORT).show();
                     } else {
 
-                        String url = "http://8.130.79.158/api/register";
+                        String url = "http://mysilicon.cn/api/register";
                         RequestQueue requestQueue = Volley.newRequestQueue(RegisterActivity.this);
                         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
                             @Override

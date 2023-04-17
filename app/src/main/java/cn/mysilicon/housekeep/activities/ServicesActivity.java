@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -46,12 +47,20 @@ public class ServicesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //获取传过来的数据
         Bundle bundle = getIntent().getExtras();
-        String categoryID = bundle.getString("categoryID");
+        String classification = bundle.getString("classification");
+        String category = bundle.getString("category");
+        Log.d(TAG, "onCreate: " + classification);
         setContentView(R.layout.activity_services);
-        getData(categoryID);
+        if (classification!=null&&category==null) {
+            getClassificationData(classification);
+        }
+        if (category!=null&&classification==null) {
+            getCategoryData(category);
+        }
+
     }
 
-    private void getData(String categoryID) {
+    private void getCategoryData(String category) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -60,7 +69,43 @@ public class ServicesActivity extends AppCompatActivity {
 
                 // 创建Request对象
                 Request request = new Request.Builder()
-                        .url("http://8.130.79.158/service?classification=" + categoryID)
+                        .url("http://mysilicon.cn/service/category?category=" + category)
+                        .get()
+                        .build();
+                Call call = client.newCall(request);
+                try {
+                    Response response = call.execute();
+                    String result = response.body().string();
+                    // 请求成功，处理结果
+                    JSONArray jsonArray = JSONArray.parseArray(result);
+                    for (int i = 0; i < jsonArray.size(); i++) {
+                        ServiceItemBean serviceItemBean = new ServiceItemBean();
+                        serviceItemBean.setId(jsonArray.getJSONObject(i).getInteger("id"));
+                        serviceItemBean.setClassification(jsonArray.getJSONObject(i).getInteger("classification"));
+                        serviceItemBean.setURL(jsonArray.getJSONObject(i).getString("image_url"));
+                        serviceItemBean.setTitle(jsonArray.getJSONObject(i).getString("title"));
+                        serviceItemBean.setContent(jsonArray.getJSONObject(i).getString("content"));
+                        serviceItemBean.setPrice(jsonArray.getJSONObject(i).getString("price"));
+                        ServiceItemBeanList.add(serviceItemBean);
+                    }
+                    handler.sendEmptyMessage(0);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    private void getClassificationData(String classification) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // 创建OkHttpClient对象
+                OkHttpClient client = new OkHttpClient();
+
+                // 创建Request对象
+                Request request = new Request.Builder()
+                        .url("http://mysilicon.cn/service?classification=" + classification)
                         .get()
                         .build();
                 Call call = client.newCall(request);

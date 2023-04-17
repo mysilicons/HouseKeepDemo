@@ -43,7 +43,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         ViewHolder viewHolder = (ViewHolder) holder;
         String url1 = mServiceItemBeanList.get(position).getURL();
         Glide.with(mActivity).load(url1).into(viewHolder.singleimage);
-        Log.d(TAG, "onBindViewHolder: url1=" + url1);
+//        Log.d(TAG, "onBindViewHolder: url1=" + url1);
         viewHolder.tv_1.setText(mServiceItemBeanList.get(position).getTitle());
         viewHolder.tv_2.setText(mServiceItemBeanList.get(position).getContent());
         viewHolder.tv_price.setText(mServiceItemBeanList.get(position).getPrice());

@@ -88,7 +88,7 @@ public class OrderActivity extends AppCompatActivity {
             public void run() {
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
-                        .url("http://8.130.79.158/myorders/all")
+                        .url("http://mysilicon.cn/myorders/all")
                         .get()
                         .build();
                 Call call = client.newCall(request);

@@ -81,7 +81,7 @@ public class PersonActivity extends AppCompatActivity {
             public void run() {
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
-                        .url("http://8.130.79.158/api/delete?username=" + username + "&password=" + password)
+                        .url("http://mysilicon.cn/api/delete?username=" + username + "&password=" + password)
                         .post(RequestBody.create("", null))
                         .build();
                 try {
@@ -189,7 +189,7 @@ public class PersonActivity extends AppCompatActivity {
 
                 // 创建Request对象
                 Request request = new Request.Builder()
-                        .url("http://8.130.79.158/address/get?uid=" + user_id)
+                        .url("http://mysilicon.cn/address/get?uid=" + user_id)
                         .get()
                         .build();
                 Call call = client.newCall(request);

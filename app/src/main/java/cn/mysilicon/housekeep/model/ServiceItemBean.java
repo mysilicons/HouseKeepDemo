@@ -2,14 +2,17 @@ package cn.mysilicon.housekeep.model;
 
 public class ServiceItemBean {
     private Integer id;
+    private Integer category;
     private Integer classification;
     private String image_url;
     private String title;
     private String content;
     private String price;
 
-    public ServiceItemBean(Integer id,Integer classification, String image_url, String title, String content, String price) {
+    public ServiceItemBean(Integer id, Integer category, Integer classification, String image_url, String title, String content, String price) {
         this.id = id;
+        this.category = category;
+        this.classification = classification;
         this.image_url = image_url;
         this.title = title;
         this.content = content;
@@ -26,6 +29,14 @@ public class ServiceItemBean {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getCategory() {
+        return category;
+    }
+
+    public void setCategory(Integer category) {
+        this.category = category;
     }
 
     public Integer getClassification() {

@@ -122,7 +122,7 @@ public class OrderAdapter extends RecyclerView.Adapter {
             public void run() {
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
-                        .url("http://8.130.79.158/myorders/delete?id=" + id)
+                        .url("http://mysilicon.cn/myorders/delete?id=" + id)
                         .post(RequestBody.create("", null))
                         .build();
                 try {
@@ -142,7 +142,7 @@ public class OrderAdapter extends RecyclerView.Adapter {
             public void run() {
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
-                        .url("http://8.130.79.158/myorders/finish?id=" + id)
+                        .url("http://mysilicon.cn/myorders/finish?id=" + id)
                         .post(RequestBody.create("", null))
                         .build();
                 try {

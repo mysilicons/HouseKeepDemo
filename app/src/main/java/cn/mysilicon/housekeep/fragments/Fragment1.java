@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.fastjson.JSONArray;
 import com.youth.banner.Banner;
-import com.youth.banner.listener.OnBannerListener;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -31,7 +30,7 @@ import java.util.List;
 import cn.mysilicon.housekeep.Adapter.HomePageAdapter;
 import cn.mysilicon.housekeep.R;
 import cn.mysilicon.housekeep.activities.CityListActivity;
-import cn.mysilicon.housekeep.activities.MainActivity;
+import cn.mysilicon.housekeep.activities.ServicesActivity;
 import cn.mysilicon.housekeep.model.ServiceItemBean;
 import cn.mysilicon.housekeep.utils.BannerLoaderUtil;
 import okhttp3.Call;
@@ -45,9 +44,22 @@ import okhttp3.Response;
  * create an instance of this fragment.
  */
 public class Fragment1 extends Fragment {
+    private static final String TAG = "Fragment1";
     private List<ServiceItemBean> ServiceItemBeanList = new ArrayList<>();
     private RecyclerView mHomePageRecyclerView;
     private HomePageAdapter mHomePageAdapter;
+    private List images = new ArrayList();
+
+    private LinearLayout ll1;
+    private LinearLayout ll2;
+    private LinearLayout ll3;
+    private LinearLayout ll4;
+    private LinearLayout ll5;
+    private LinearLayout ll6;
+    private LinearLayout ll7;
+    private LinearLayout ll8;
+    private LinearLayout ll9;
+    private LinearLayout ll10;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -97,7 +109,6 @@ public class Fragment1 extends Fragment {
         return view;
     }
 
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -122,17 +133,112 @@ public class Fragment1 extends Fragment {
         });
         getImages();
         getData();
+        onClickListener();
+    }
 
+    private void onClickListener() {
+        ll1 = getActivity().findViewById(R.id.ll1);
+        ll2 = getActivity().findViewById(R.id.ll2);
+        ll3 = getActivity().findViewById(R.id.ll3);
+        ll4 = getActivity().findViewById(R.id.ll4);
+        ll5 = getActivity().findViewById(R.id.ll5);
+        ll6 = getActivity().findViewById(R.id.ll6);
+        ll7 = getActivity().findViewById(R.id.ll7);
+        ll8 = getActivity().findViewById(R.id.ll8);
+        ll9 = getActivity().findViewById(R.id.ll9);
+        ll10 = getActivity().findViewById(R.id.ll10);
+        ll1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ServicesActivity.class);
+                intent.putExtra("category", "1");
+                startActivity(intent);
+            }
+        });
+        ll2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ServicesActivity.class);
+                intent.putExtra("category", "2");
+                startActivity(intent);
+            }
+        });
+        ll3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ServicesActivity.class);
+                intent.putExtra("category", "3");
+                startActivity(intent);
+            }
+        });
+        ll4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ServicesActivity.class);
+                intent.putExtra("category", "4");
+                startActivity(intent);
+            }
+        });
+        ll5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ServicesActivity.class);
+                intent.putExtra("category", "5");
+                startActivity(intent);
+            }
+        });
+        ll6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ServicesActivity.class);
+                intent.putExtra("category", "6");
+                startActivity(intent);
+            }
+        });
+        ll7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ServicesActivity.class);
+                intent.putExtra("category", "7");
+                startActivity(intent);
+            }
+        });
+        ll8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ServicesActivity.class);
+                intent.putExtra("category", "8");
+                startActivity(intent);
+            }
+        });
+        ll9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ServicesActivity.class);
+                intent.putExtra("category", "9");
+                startActivity(intent);
+            }
+        });
+        ll10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ServicesActivity.class);
+                intent.putExtra("category", "10");
+                startActivity(intent);
+            }
+        });
     }
 
     private void initView() {
+        mHomePageAdapter = new HomePageAdapter(ServiceItemBeanList, getActivity());
+        mHomePageRecyclerView = getActivity().findViewById(R.id.home_page_rv);
+        mHomePageRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mHomePageRecyclerView.setAdapter(new HomePageAdapter(ServiceItemBeanList, getActivity()));
+    }
+
+    private void initBanner() {
+        Log.d(TAG, "initBanner: " + images);
         Banner banner = getActivity().findViewById(R.id.banner);
-
-        List images = new ArrayList();
-        images.add("https://image14.m1905.cn/uploadfile/2018/0907/thumb_1_1380_460_20180907013518839623.jpg");
-        images.add("https://image14.m1905.cn/uploadfile/2018/0906/thumb_1_1380_460_20180906040153529630.jpg");
-        images.add("https://image13.m1905.cn/uploadfile/2018/0907/thumb_1_1380_460_20180907114844929630.jpg");
-
         //设置图片加载器
         banner.setImageLoader(new BannerLoaderUtil());
         //设置图片集合
@@ -140,33 +246,57 @@ public class Fragment1 extends Fragment {
         //banner设置方法全部调用完毕时最后调用
         banner.start();
         //增加点击事件
-        banner.setOnBannerListener(new OnBannerListener() {
-            @Override
-            public void OnBannerClick(int position) {
-                Toast.makeText(getActivity(), "你点击了：" + position, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        mHomePageAdapter = new HomePageAdapter(ServiceItemBeanList, getActivity());
-        mHomePageRecyclerView = getActivity().findViewById(R.id.home_page_rv);
-        mHomePageRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mHomePageRecyclerView.setAdapter(new HomePageAdapter(ServiceItemBeanList, getActivity()));
-
-
+//        banner.setOnBannerListener(new OnBannerListener() {
+//            @Override
+//            public void OnBannerClick(int position) {
+//                Toast.makeText(getActivity(), "你点击了：" + position, Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 
     private final Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if (msg.what == 0) {//完成主界面更新,拿到数据
-                initView();
+            switch (msg.what) {
+                case 0:
+                    initView();
+                    break;
+                case 1:
+                    initBanner();
+                    break;
             }
         }
     };
 
     private void getImages() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // 创建OkHttpClient对象
+                OkHttpClient client = new OkHttpClient();
 
+                // 创建Request对象
+                Request request = new Request.Builder()
+                        .url("http://mysilicon.cn/image/all")
+                        .get()
+                        .build();
+                Call call = client.newCall(request);
+                try {
+                    Response response = call.execute();
+                    String result = response.body().string();
+                    Log.d(TAG, result);
+                    // 请求成功，处理结果
+                    JSONArray jsonArray = JSONArray.parseArray(result);
+                    for (int i = 0; i < jsonArray.size(); i++) {
+                        images.add(jsonArray.getJSONObject(i).getString("url"));
+                    }
+                    handler.sendEmptyMessage(1);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     private void getData() {
@@ -178,7 +308,7 @@ public class Fragment1 extends Fragment {
 
                 // 创建Request对象
                 Request request = new Request.Builder()
-                        .url("http://8.130.79.158/service/all")
+                        .url("http://mysilicon.cn/service/all")
                         .get()
                         .build();
                 Call call = client.newCall(request);

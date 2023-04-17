@@ -165,7 +165,7 @@ public class AddressManagerActivity extends AppCompatActivity {
 
         // 创建Request对象
         Request request = new Request.Builder()
-                .url("http://8.130.79.158/address/add")
+                .url("http://mysilicon.cn/address/add")
                 .post(requestBody)
                 .build();
 

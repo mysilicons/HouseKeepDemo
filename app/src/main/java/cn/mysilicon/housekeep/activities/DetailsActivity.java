@@ -56,7 +56,7 @@ public class DetailsActivity extends AppCompatActivity {
 
                 // 创建Request对象
                 Request request = new Request.Builder()
-                        .url("http://8.130.79.158/service/detail?id=" + id)
+                        .url("http://mysilicon.cn/service/detail?id=" + id)
                         .get()
                         .build();
                 Call call = client.newCall(request);
@@ -168,7 +168,7 @@ public class DetailsActivity extends AppCompatActivity {
 
                 // 创建Request对象
                 Request request = new Request.Builder()
-                        .url("http://8.130.79.158/orders/add?id=" + id)
+                        .url("http://mysilicon.cn/orders/add?id=" + id)
                         .post(RequestBody.create("", null))
                         .build();
                 try {
@@ -190,7 +190,7 @@ public class DetailsActivity extends AppCompatActivity {
 
                 // 创建Request对象
                 Request request = new Request.Builder()
-                        .url("http://8.130.79.158/myorders/buy?product_id=" + productId)
+                        .url("http://mysilicon.cn/myorders/buy?product_id=" + productId)
                         .post(RequestBody.create("", null))
                         .build();
                 try {
@@ -212,7 +212,7 @@ public class DetailsActivity extends AppCompatActivity {
 
                 // 创建Request对象
                 Request request = new Request.Builder()
-                        .url("http://8.130.79.158/orders/delete?id=" + productId)
+                        .url("http://mysilicon.cn/orders/delete?id=" + productId)
                         .post(RequestBody.create("", null))
                         .build();
                 try {

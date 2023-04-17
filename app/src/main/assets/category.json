@@ -16,31 +16,31 @@
           "id": 1,
           "type": "category",
           "title": "居家卫生",
-          "imgURL": "http://8.130.79.158:8090/居家卫生.png"
+          "imgURL": "http://image.mysilicon.cn/居家卫生.png"
         },
         {
           "id": 2,
           "type": "category",
           "title": "电器清洗",
-          "imgURL": "http://8.130.79.158:8090/电器清洗.png"
+          "imgURL": "http://image.mysilicon.cn/电器清洗.png"
         },
         {
           "id": 3,
           "type": "category",
           "title": "专项清洁",
-          "imgURL": "http://8.130.79.158:8090/专项清洁.png"
+          "imgURL": "http://image.mysilicon.cn/专项清洁.png"
         },
         {
           "id": 4,
           "type": "category",
           "title": "布艺除螨",
-          "imgURL": "http://8.130.79.158:8090/布艺除螨.png"
+          "imgURL": "http://image.mysilicon.cn/布艺除螨.png"
         },
         {
           "id": 5,
           "type": "category",
           "title": "消杀除菌",
-          "imgURL": "http://8.130.79.158:8090/消杀除菌.png"
+          "imgURL": "http://image.mysilicon.cn/消杀除菌.png"
         }
       ]
     },
@@ -59,19 +59,19 @@
           "id": 6,
           "type": "category",
           "title": "照顾老幼",
-          "imgURL": "http://8.130.79.158:8090/照顾老幼.png"
+          "imgURL": "http://image.mysilicon.cn/照顾老幼.png"
         },
         {
           "id": 7,
           "type": "category",
           "title": "科学月子",
-          "imgURL": "http://8.130.79.158:8090/科学月子.png"
+          "imgURL": "http://image.mysilicon.cn/科学月子.png"
         },
         {
           "id": 8,
           "type": "category",
           "title": "育婴启蒙",
-          "imgURL": "http://8.130.79.158:8090/育婴启蒙.png"
+          "imgURL": "http://image.mysilicon.cn/育婴启蒙.png"
         }
       ]
     },
@@ -82,19 +82,19 @@
           "id": 9,
           "type": "category",
           "title": "货车搬家",
-          "imgURL": "http://8.130.79.158:8090/货车搬家.png"
+          "imgURL": "http://image.mysilicon.cn/货车搬家.png"
         },
         {
           "id": 10,
           "type": "category",
           "title": "托管式搬家",
-          "imgURL": "http://8.130.79.158:8090/托管搬家.png"
+          "imgURL": "http://image.mysilicon.cn/托管搬家.png"
         },
         {
           "id": 11,
           "type": "category",
           "title": "办公室搬家",
-          "imgURL": "http://8.130.79.158:8090/办公室搬家.png"
+          "imgURL": "http://image.mysilicon.cn/办公室搬家.png"
         }
       ],
       "moreIcon": "https://wicdn.xiaohongchun.com/xhc-plat/1499690549966_xbr3ACA38e.png",
@@ -121,19 +121,19 @@
           "id": 12,
           "type": "category",
           "title": "厨卫疏通",
-          "imgURL": "http://8.130.79.158:8090/厨卫疏通.png"
+          "imgURL": "http://image.mysilicon.cn/厨卫疏通.png"
         },
         {
           "id": 13,
           "type": "category",
           "title": "开锁",
-          "imgURL": "http://8.130.79.158:8090/开锁.png"
+          "imgURL": "http://image.mysilicon.cn/开锁.png"
         },
         {
           "id": 14,
           "type": "category",
           "title": "换锁装锁",
-          "imgURL": "http://8.130.79.158:8090/换锁装锁.png"
+          "imgURL": "http://image.mysilicon.cn/换锁装锁.png"
         }
       ]
     },
@@ -152,43 +152,43 @@
           "id": 15,
           "type": "category",
           "title": "家电",
-          "imgURL": "http://8.130.79.158:8090/家电.png"
+          "imgURL": "http://image.mysilicon.cn/家电.png"
         },
         {
           "id": 16,
           "type": "category",
           "title": "家具",
-          "imgURL": "http://8.130.79.158:8090/家具.png"
+          "imgURL": "http://image.mysilicon.cn/家具.png"
         },
         {
           "id": 17,
           "type": "category",
           "title": "金属",
-          "imgURL": "http://8.130.79.158:8090/金属.png"
+          "imgURL": "http://image.mysilicon.cn/金属.png"
         },
         {
           "id": 18,
           "type": "category",
           "title": "厨房设备",
-          "imgURL": "http://8.130.79.158:8090/厨房设备.png"
+          "imgURL": "http://image.mysilicon.cn/厨房设备.png"
         },
         {
           "id": 19,
           "type": "category",
           "title": "电脑",
-          "imgURL": "http://8.130.79.158:8090/电脑.png"
+          "imgURL": "http://image.mysilicon.cn/电脑.png"
         },
         {
           "id": 20,
           "type": "category",
           "title": "文体乐器",
-          "imgURL": "http://8.130.79.158:8090/文体乐器.png"
+          "imgURL": "http://image.mysilicon.cn/文体乐器.png"
         },
         {
           "id": 21,
           "type": "category",
           "title": "办公用品",
-          "imgURL": "http://8.130.79.158:8090/办公用品.png"
+          "imgURL": "http://image.mysilicon.cn/办公用品.png"
         }
       ]
     },
@@ -207,13 +207,13 @@
           "id": 22,
           "type": "category",
           "title": "墙体墙面",
-          "imgURL": "http://8.130.79.158:8090/墙体墙面.png"
+          "imgURL": "http://image.mysilicon.cn/墙体墙面.png"
         },
         {
           "id": 23,
           "type": "category",
           "title": "地面地暖",
-          "imgURL": "http://8.130.79.158:8090/地面地暖.png"
+          "imgURL": "http://image.mysilicon.cn/地面地暖.png"
         }
       ]
     },
@@ -232,13 +232,13 @@
           "id": 24,
           "type": "category",
           "title": "水电维修",
-          "imgURL": "http://8.130.79.158:8090/水电维修.png"
+          "imgURL": "http://image.mysilicon.cn/水电维修.png"
         },
         {
           "id": 25,
           "type": "category",
           "title": "五金安装",
-          "imgURL": "http://8.130.79.158:8090/五金安装.png"
+          "imgURL": "http://image.mysilicon.cn/五金安装.png"
         }
       ]
     },
@@ -257,19 +257,19 @@
           "id": 26,
           "type": "category",
           "title": "衣物清洗",
-          "imgURL": "http://8.130.79.158:8090/衣物清洗.png"
+          "imgURL": "http://image.mysilicon.cn/衣物清洗.png"
         },
         {
           "id": 27,
           "type": "category",
           "title": "鞋子清洗",
-          "imgURL": "http://8.130.79.158:8090/鞋子清洗.png"
+          "imgURL": "http://image.mysilicon.cn/鞋子清洗.png"
         },
         {
           "id": 28,
           "type": "category",
           "title": "高端洗护",
-          "imgURL": "http://8.130.79.158:8090/高端洗护.png"
+          "imgURL": "http://image.mysilicon.cn/高端洗护.png"
         }
       ]
     },
@@ -288,7 +288,7 @@
           "id": 29,
           "type": "category",
           "title": "上门做菜",
-          "imgURL": "http://8.130.79.158:8090/上门做菜.png"
+          "imgURL": "http://image.mysilicon.cn/上门做菜.png"
         }
       ]
     },
@@ -307,25 +307,25 @@
           "id": 30,
           "type": "category",
           "title": "电脑",
-          "imgURL": "http://8.130.79.158:8090/笔记本电脑.png"
+          "imgURL": "http://image.mysilicon.cn/笔记本电脑.png"
         },
         {
           "id": 31,
           "type": "category",
           "title": "网络",
-          "imgURL": "http://8.130.79.158:8090/网络.png"
+          "imgURL": "http://image.mysilicon.cn/网络.png"
         },
         {
           "id": 32,
           "type": "category",
           "title": "手机",
-          "imgURL": "http://8.130.79.158:8090/手机.png"
+          "imgURL": "http://image.mysilicon.cn/手机.png"
         },
         {
           "id": 33,
           "type": "category",
           "title": "办公设备",
-          "imgURL": "http://8.130.79.158:8090/办公设备.png"
+          "imgURL": "http://image.mysilicon.cn/办公设备.png"
         }
       ]
     }
