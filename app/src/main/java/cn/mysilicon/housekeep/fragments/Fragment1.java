@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -112,27 +111,13 @@ public class Fragment1 extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //接收数据
-        Bundle bundle = getArguments();
-        //City = bundle.getString("city");
-        City = loadCity();
-        Button btn = (Button) getActivity().findViewById(R.id.btn_city);
-        if (City != null) {
-            btn.setText(City);
-        } else {
-            btn.setText("定位失败");
+        if (images.size()==0){
+            getImages();
+            getData();
+        }else {
+            initView();
+            initBanner();
         }
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), CityListActivity.class);
-                intent.putExtra("City", City);
-//                Log.d("传过去的city", City);
-                startActivityForResult(intent, 1);
-            }
-        });
-        getImages();
-        getData();
         onClickListener();
     }
 
@@ -147,6 +132,21 @@ public class Fragment1 extends Fragment {
         ll8 = getActivity().findViewById(R.id.ll8);
         ll9 = getActivity().findViewById(R.id.ll9);
         ll10 = getActivity().findViewById(R.id.ll10);
+        City = loadCity();
+        Button btn = (Button) getActivity().findViewById(R.id.btn_city);
+        if (City != null) {
+            btn.setText(City);
+        } else {
+            btn.setText("定位失败");
+        }
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CityListActivity.class);
+                intent.putExtra("City", City);
+                startActivityForResult(intent, 1);
+            }
+        });
         ll1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -237,7 +237,6 @@ public class Fragment1 extends Fragment {
     }
 
     private void initBanner() {
-        Log.d(TAG, "initBanner: " + images);
         Banner banner = getActivity().findViewById(R.id.banner);
         //设置图片加载器
         banner.setImageLoader(new BannerLoaderUtil());
@@ -246,12 +245,6 @@ public class Fragment1 extends Fragment {
         //banner设置方法全部调用完毕时最后调用
         banner.start();
         //增加点击事件
-//        banner.setOnBannerListener(new OnBannerListener() {
-//            @Override
-//            public void OnBannerClick(int position) {
-//                Toast.makeText(getActivity(), "你点击了：" + position, Toast.LENGTH_SHORT).show();
-//            }
-//        });
     }
 
     private final Handler handler = new Handler(Looper.getMainLooper()) {
@@ -285,7 +278,6 @@ public class Fragment1 extends Fragment {
                 try {
                     Response response = call.execute();
                     String result = response.body().string();
-                    Log.d(TAG, result);
                     // 请求成功，处理结果
                     JSONArray jsonArray = JSONArray.parseArray(result);
                     for (int i = 0; i < jsonArray.size(); i++) {
@@ -339,9 +331,8 @@ public class Fragment1 extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
+        if (requestCode == 1&&data!=null) {
             City = data.getStringExtra("City");
-            Log.d("Fragment1", "onActivityResult: " + City);
             Button btn = (Button) getActivity().findViewById(R.id.btn_city);
             btn.setText(City);
         }

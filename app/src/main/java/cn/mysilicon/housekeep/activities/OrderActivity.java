@@ -57,7 +57,7 @@ public class OrderActivity extends AppCompatActivity {
     private void initViews() {
         //初始标题栏
         Toolbar toolbar = findViewById(R.id.tb_register_back);
-        toolbar.setTitle("个人信息");
+        toolbar.setTitle("我的订单");
         setSupportActionBar(toolbar);
 
         //显示返回按钮
