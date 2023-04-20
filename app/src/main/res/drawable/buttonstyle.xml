@@ -9,11 +9,11 @@
         </shape>
     </item>
     <item android:state_pressed="true">
-    <shape>
-        <!-- 色值 -->
-        <solid android:color="#289BE5" />
-        <!-- 圆角 -->
-        <corners android:radius="10dp" />
-    </shape>
+        <shape>
+            <!-- 色值 -->
+            <solid android:color="#289BE5" />
+            <!-- 圆角 -->
+            <corners android:radius="10dp" />
+        </shape>
     </item>
 </selector>

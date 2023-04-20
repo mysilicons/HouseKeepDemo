@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.RegisterActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@drawable/bg"
         android:gravity="center">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,12 +27,14 @@
                 android:textColor="#000000"
                 android:textSize="28sp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingBottom="20dp"
             android:paddingTop="20dp">
+
             <EditText
                 android:id="@+id/edt_register_username"
                 android:layout_width="match_parent"
@@ -43,7 +46,7 @@
                 android:textColor="#9F9FA0"
                 android:singleLine="true"
                 android:textColorHint="#9F9FA0"
-                android:hint="手机号"/>
+                android:hint="手机号" />
 
             <View
                 android:layout_width="match_parent"
@@ -65,11 +68,11 @@
                 android:textColor="#9F9FA0"
                 android:textColorHint="#9F9FA0"
                 android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"/>
-
+                android:layout_marginRight="50dp" />
 
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -106,7 +109,8 @@
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/buttonstyle"
                 android:layout_weight="1"
-                android:text="去登录"/>
+                android:text="去登录" />
+
             <Button
                 android:id="@+id/btn_submit"
                 android:layout_width="wrap_content"
@@ -115,7 +119,7 @@
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/buttonstyle"
                 android:layout_weight="1"
-                android:text="注册"/>
+                android:text="注册" />
         </LinearLayout>
 
     </LinearLayout>

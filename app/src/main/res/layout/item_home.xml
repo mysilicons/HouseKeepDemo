@@ -18,8 +18,7 @@
         android:id="@+id/gridView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:numColumns="3">
-    </cn.mysilicon.housekeep.view.GridViewForScrollView>
+        android:numColumns="3"></cn.mysilicon.housekeep.view.GridViewForScrollView>
 
 
 </LinearLayout>

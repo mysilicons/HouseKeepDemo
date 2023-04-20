@@ -51,10 +51,10 @@ public class ServicesActivity extends AppCompatActivity {
         String category = bundle.getString("category");
         Log.d(TAG, "onCreate: " + classification);
         setContentView(R.layout.activity_services);
-        if (classification!=null&&category==null) {
+        if (classification != null && category == null) {
             getClassificationData(classification);
         }
-        if (category!=null&&classification==null) {
+        if (category != null && classification == null) {
             getCategoryData(category);
         }
 

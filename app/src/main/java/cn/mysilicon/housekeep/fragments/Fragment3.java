@@ -37,9 +37,9 @@ public class Fragment3 extends Fragment {
     private String mParam2;
 
     private ListView listView;
-    private ArrayAdapter<String>arr_adapter;
+    private ArrayAdapter<String> arr_adapter;
     private SimpleAdapter simp_adapter;
-    private List<Map<String, Object>>dataList;//SimpleAdapter的data
+    private List<Map<String, Object>> dataList;//SimpleAdapter的data
 
     public Fragment3() {
         // Required empty public constructor
@@ -110,20 +110,21 @@ public class Fragment3 extends Fragment {
             }
         });
     }
+
     private List<Map<String, Object>> getData() {
-        Map<String, Object>map1=new HashMap<String, Object>();
+        Map<String, Object> map1 = new HashMap<String, Object>();
         map1.put("pic", R.drawable.icon1);
         map1.put("text", "客服消息");
         dataList.add(map1);
-        Map<String, Object>map2=new HashMap<String, Object>();
+        Map<String, Object> map2 = new HashMap<String, Object>();
         map2.put("pic", R.drawable.icon2);
         map2.put("text", "全屋保洁");
         dataList.add(map2);
-        Map<String, Object>map3=new HashMap<String, Object>();
+        Map<String, Object> map3 = new HashMap<String, Object>();
         map3.put("pic", R.drawable.icon3);
         map3.put("text", "家电清洁");
         dataList.add(map3);
-        Map<String, Object>map4=new HashMap<String, Object>();
+        Map<String, Object> map4 = new HashMap<String, Object>();
         map4.put("pic", R.drawable.icon4);
         map4.put("text", "育儿保姆");
         dataList.add(map4);

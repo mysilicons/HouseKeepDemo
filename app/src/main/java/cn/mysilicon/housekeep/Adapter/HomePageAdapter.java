@@ -2,7 +2,6 @@ package cn.mysilicon.housekeep.Adapter;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,7 @@ import cn.mysilicon.housekeep.R;
 import cn.mysilicon.housekeep.activities.DetailsActivity;
 import cn.mysilicon.housekeep.model.ServiceItemBean;
 
-public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final String TAG = "HomePageAdapter";
     private List<ServiceItemBean> mServiceItemBeanList;
 
@@ -62,11 +61,12 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return mServiceItemBeanList.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
+    static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView singleimage;
         TextView tv_1;
         TextView tv_2;
         TextView tv_price;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             singleimage = itemView.findViewById(R.id.singleimageView);

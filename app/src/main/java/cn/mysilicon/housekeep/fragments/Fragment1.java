@@ -111,10 +111,10 @@ public class Fragment1 extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (images.size()==0){
+        if (images.size() == 0) {
             getImages();
             getData();
-        }else {
+        } else {
             initView();
             initBanner();
         }
@@ -331,7 +331,7 @@ public class Fragment1 extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1&&data!=null) {
+        if (requestCode == 1 && data != null) {
             City = data.getStringExtra("City");
             Button btn = (Button) getActivity().findViewById(R.id.btn_city);
             btn.setText(City);

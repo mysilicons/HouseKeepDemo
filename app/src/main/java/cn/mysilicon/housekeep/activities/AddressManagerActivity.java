@@ -188,6 +188,7 @@ public class AddressManagerActivity extends AppCompatActivity {
 
 
     }
+
     public static void hideKeyboard(Activity context) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         // 隐藏软键盘

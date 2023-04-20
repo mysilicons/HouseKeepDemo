@@ -76,10 +76,10 @@ public class HomeItemAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 String classification = subcategory.getId();
-                Log.d(TAG,classification);
+                Log.d(TAG, classification);
                 //跳转到服务页面
                 Intent intent = new Intent(context, ServicesActivity.class);
-                intent.putExtra("classification",classification);
+                intent.putExtra("classification", classification);
                 context.startActivity(intent);
                 // Toast.makeText(context, "点击了" + position, Toast.LENGTH_SHORT).show();
             }

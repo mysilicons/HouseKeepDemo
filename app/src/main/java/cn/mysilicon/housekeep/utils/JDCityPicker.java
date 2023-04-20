@@ -90,7 +90,7 @@ public class JDCityPicker extends PopupWindow {
         }
         this.setAnimationStyle(R.style.PopupWindow);
 
-        String data =  cn.mysilicon.housekeep.utils.JsonParser.getJson(context, "city.json");
+        String data = cn.mysilicon.housekeep.utils.JsonParser.getJson(context, "city.json");
         JsonParser jsonParser = new JsonParser();
         JsonArray jsonElements = jsonParser.parse(data).getAsJsonArray();//获取JsonArray对象
         beans = new ArrayList<>();

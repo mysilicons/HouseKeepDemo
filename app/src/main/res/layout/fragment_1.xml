@@ -60,6 +60,7 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:src="@drawable/i1" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -78,11 +79,13 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:src="@drawable/i2" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="保姆月嫂" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:id="@+id/ll3"
                         android:layout_width="wrap_content"
@@ -95,11 +98,13 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:src="@drawable/i3" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="放心搬家" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:id="@+id/ll4"
                         android:layout_width="wrap_content"
@@ -112,11 +117,13 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:src="@drawable/i4" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="家庭应急" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:id="@+id/ll5"
                         android:layout_width="wrap_content"
@@ -129,6 +136,7 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:src="@drawable/i5" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -155,6 +163,7 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:src="@drawable/i6" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -173,11 +182,13 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:src="@drawable/i7" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="水电五金" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:id="@+id/ll8"
                         android:layout_width="wrap_content"
@@ -190,11 +201,13 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:src="@drawable/i8" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="衣物洗护" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:id="@+id/ll9"
                         android:layout_width="wrap_content"
@@ -207,11 +220,13 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:src="@drawable/i9" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="餐饮美食" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:id="@+id/ll10"
                         android:layout_width="wrap_content"
@@ -224,6 +239,7 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:src="@drawable/i10" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

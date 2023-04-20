@@ -34,7 +34,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
@@ -105,13 +104,12 @@ public class CityListActivity extends AppCompatActivity implements AbsListView.O
     private String curSelCity;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         city = intent.getStringExtra("City");
-        locationCity=city;
+        locationCity = city;
 //        Log.d("传过来的city",city);
         //保存到本地
         saveLocationCity();
@@ -385,7 +383,7 @@ public class CityListActivity extends AppCompatActivity implements AbsListView.O
                 backBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent();	// 构建了一个intent，仅用来传递数据
+                        Intent intent = new Intent();    // 构建了一个intent，仅用来传递数据
                         intent.putExtra("City", locationCity); // 存储要返回到上一个activity的数据
                         setResult(RESULT_OK, intent);    // 设置返回码和返回数据
                         finish();
@@ -785,14 +783,13 @@ public class CityListActivity extends AppCompatActivity implements AbsListView.O
     };
 
 
-
     /**
      * 存储当前定位到手机本地
      */
     private void saveLocationCity() {
         FileOutputStream cityOut = null;
         BufferedWriter cityWriter = null;
-        try{
+        try {
             cityOut = openFileOutput("locationCity", Context.MODE_PRIVATE);
             cityWriter = new BufferedWriter(new OutputStreamWriter(cityOut));
             cityWriter.write(locationCity);

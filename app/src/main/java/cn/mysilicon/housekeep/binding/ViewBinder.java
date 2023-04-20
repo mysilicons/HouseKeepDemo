@@ -13,8 +13,8 @@ import java.lang.reflect.Field;
 
 public class ViewBinder {
 
-    public static void bind(Activity activity){
-        bind(activity,activity.getWindow().getDecorView());
+    public static void bind(Activity activity) {
+        bind(activity, activity.getWindow().getDecorView());
     }
 
     public static void bind(Object target, View source) {
@@ -27,9 +27,9 @@ public class ViewBinder {
                         continue;
                     }
                     Bind bind = field.getAnnotation(Bind.class);
-                    if(bind != null){
+                    if (bind != null) {
                         int viewId = bind.value();
-                        field.set(target,source.findViewById(viewId));
+                        field.set(target, source.findViewById(viewId));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

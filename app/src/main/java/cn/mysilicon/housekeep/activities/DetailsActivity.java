@@ -87,7 +87,7 @@ public class DetailsActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch (msg.what){
+            switch (msg.what) {
                 case 0:
                     initView();
                     break;
@@ -129,13 +129,17 @@ public class DetailsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(DetailsActivity.this, CollectActivity.class);
                 startActivity(intent);
-            };
+            }
+
+            ;
         });
         findViewById(R.id.collect).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 collect(detailsBean.getId());
-            };
+            }
+
+            ;
         });
         findViewById(R.id.conect_seller).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,7 +148,9 @@ public class DetailsActivity extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
                 intent.setData(android.net.Uri.parse("tel:028-88888888"));
                 startActivity(intent);
-            };
+            }
+
+            ;
         });
         findViewById(R.id.pay).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,7 +160,9 @@ public class DetailsActivity extends AppCompatActivity {
                 Toast.makeText(DetailsActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(DetailsActivity.this, OrderActivity.class);
                 startActivity(intent);
-            };
+            }
+
+            ;
         });
 
     }
@@ -177,7 +185,7 @@ public class DetailsActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 handler.sendEmptyMessage(1);
-    }
+            }
         }).start();
     }
 

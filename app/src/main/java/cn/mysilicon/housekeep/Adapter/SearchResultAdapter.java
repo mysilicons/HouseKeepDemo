@@ -53,7 +53,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         switch (viewType) {
             case ServicesActivity.LIST_COLUMN_SINGLE:
-                ViewHolderItemSingle viewHolderItemSingle= new ViewHolderItemSingle(mActivity.getLayoutInflater().inflate(R.layout.rv_item_single, parent, false));
+                ViewHolderItemSingle viewHolderItemSingle = new ViewHolderItemSingle(mActivity.getLayoutInflater().inflate(R.layout.rv_item_single, parent, false));
                 viewHolderItemSingle.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

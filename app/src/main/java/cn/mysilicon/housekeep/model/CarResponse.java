@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * 购物车返回数据
+ *
  * @author llw
  */
 public class CarResponse {

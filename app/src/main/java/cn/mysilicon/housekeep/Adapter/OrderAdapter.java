@@ -75,8 +75,7 @@ public class OrderAdapter extends RecyclerView.Adapter {
         ((ViewHolder) holder).title.setText(order.getTitle());
         ((ViewHolder) holder).price.setText(order.getPrice());
         ((ViewHolder) holder).content.setText(order.getContent());
-        if (order.getCur_status().equals("进行中"))
-        {
+        if (order.getCur_status().equals("进行中")) {
             ((ViewHolder) holder).finish.setText("完成");
             ((ViewHolder) holder).finish.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -88,7 +87,7 @@ public class OrderAdapter extends RecyclerView.Adapter {
                 }
             });
         }
-        if(order.getCur_status().equals("已完成")) {
+        if (order.getCur_status().equals("已完成")) {
             ((ViewHolder) holder).finish.setText("删除");
             ((ViewHolder) holder).finish.setOnClickListener(new View.OnClickListener() {
                 @Override
