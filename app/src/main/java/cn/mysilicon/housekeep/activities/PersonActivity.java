@@ -9,8 +9,6 @@ import android.os.Message;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +16,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.fastjson.JSONArray;
 
@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cn.mysilicon.housekeep.Adapter.AddressAdapter;
 import cn.mysilicon.housekeep.R;
 import cn.mysilicon.housekeep.model.AddressMatch;
 import okhttp3.Call;
@@ -140,7 +141,6 @@ public class PersonActivity extends AppCompatActivity {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 0:
-                    Log.d(TAG, "拿到数据了准备更新UI");
                     //更新UI
                     Integer size = addressesList.size();
                     String[] title = new String[size];
@@ -160,10 +160,10 @@ public class PersonActivity extends AppCompatActivity {
                         showitem.put("phone", phone[i]);
                         listitem.add(showitem);
                     }
-                    //创建一个simpleAdapter
-                    SimpleAdapter myAdapter = new SimpleAdapter(getApplicationContext(), listitem, R.layout.adress_item, new String[]{"title", "name", "phone"}, new int[]{R.id.address_title_textview, R.id.address_name_textview, R.id.address_phone_textview});
-                    ListView listView = (ListView) findViewById(R.id.address_listview);
-                    listView.setAdapter(myAdapter);
+                    AddressAdapter addressAdapter = new AddressAdapter(addressesList, PersonActivity.this);
+                    RecyclerView recyclerView = findViewById(R.id.address_listview);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(PersonActivity.this));
+                    recyclerView.setAdapter(addressAdapter);
                     break;
                 case 1:
                     Toast.makeText(PersonActivity.this, "注销成功", Toast.LENGTH_SHORT).show();

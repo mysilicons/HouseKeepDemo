@@ -82,7 +82,7 @@ public class AddressManagerActivity extends AppCompatActivity {
                 mJDCityPicker = new JDCityPicker(AddressManagerActivity.this, new JDCityPicker.onCitySelect() {
                     @Override
                     public void onSelect(String province, String city, String area) {
-                        mTvCity.setText(province + "   " + city + "   " + area);
+                        mTvCity.setText(province + city + area);
                     }
                 });
                 mJDCityPicker.showAtLocation(mTvSlect, Gravity.BOTTOM, 0, 0);

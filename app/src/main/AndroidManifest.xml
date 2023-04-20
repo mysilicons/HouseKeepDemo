@@ -19,36 +19,39 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
             android:name=".activities.DetailsActivity"
-            android:exported="false" />
+            android:exported="true" />
+        <activity
+            android:name=".activities.AddressEditActivity"
+            android:exported="true" />
         <activity
             android:name=".activities.ServicesActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activities.MessageActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activities.CollectActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activities.AddressManagerActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activities.OrderActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activities.PersonActivity"
-            android:exported="false" />
+            android:exported="true" />
 
         <uses-library
             android:name="org.apache.http.legacy"
-            android:required="false" />
+            android:required="true" />
 
         <activity
             android:name=".activities.RegisterActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activities.LoginActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activities.CityListActivity"
             android:exported="true" />
