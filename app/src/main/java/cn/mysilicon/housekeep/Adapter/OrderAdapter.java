@@ -25,6 +25,7 @@ import cn.mysilicon.housekeep.model.Order;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class OrderAdapter extends RecyclerView.Adapter {
     private static final String TAG = "OrderAdapter";
@@ -81,22 +82,32 @@ public class OrderAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View v) {
                     finish(order.getId());
-                    Log.d(TAG, "onClick: " + order.getId());
+                    fresh(position);
                     ((ViewHolder) holder).finish.setText("删除");
-                    ((ViewHolder) holder).cur_status.setText("已完成");
                 }
             });
         }
         if (order.getCur_status().equals("已完成")) {
-            ((ViewHolder) holder).finish.setText("删除");
             ((ViewHolder) holder).finish.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     delete(order.getId());
-                    Log.d(TAG, "onClick: " + order.getId());
+                    remove(position);
                 }
             });
+            ((ViewHolder) holder).finish.setText("删除");
         }
+    }
+
+    private void fresh(int position) {
+        mOrderList.get(position).setCur_status("已完成");
+        notifyItemChanged(position);
+    }
+
+    private void remove(int position) {
+        mOrderList.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, mOrderList.size());
     }
 
 
@@ -125,7 +136,8 @@ public class OrderAdapter extends RecyclerView.Adapter {
                         .post(RequestBody.create("", null))
                         .build();
                 try {
-                    client.newCall(request).execute();
+                    Response response = client.newCall(request).execute();
+                    Log.d(TAG, "run: " + response.body().string());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -145,7 +157,8 @@ public class OrderAdapter extends RecyclerView.Adapter {
                         .post(RequestBody.create("", null))
                         .build();
                 try {
-                    client.newCall(request).execute();
+                    Response response = client.newCall(request).execute();
+                    Log.d(TAG, "run: " + response.body().string());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
