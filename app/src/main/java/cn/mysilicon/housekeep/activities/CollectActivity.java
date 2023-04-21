@@ -353,7 +353,7 @@ public class CollectActivity extends AppCompatActivity implements GoodsCallback,
                 if (cartlistBean.isChecked()) {
                     goodsList.add(cartlistBean);
                     buy(cartlistBean.getProductId());
-                    delete(cartlistBean.getProductId());
+                    delete(cartlistBean.getId());
                 }
             }
             //删除服务
@@ -370,6 +370,9 @@ public class CollectActivity extends AppCompatActivity implements GoodsCallback,
         isEdit = false;
         //刷新数据
         storeAdapter.notifyDataSetChanged();
+        Toast.makeText(this, "结算成功", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, OrderActivity.class);
+        startActivity(intent);
     }
 
 
@@ -396,8 +399,7 @@ public class CollectActivity extends AppCompatActivity implements GoodsCallback,
                 //当有选中服务时添加到此列表中
                 if (cartlistBean.isChecked()) {
                     goodsList.add(cartlistBean);
-                    delete(cartlistBean.getProductId());
-                    System.out.println("cartlistBean.getProductId() = " + cartlistBean.getProductId());
+                    delete(cartlistBean.getId());
                 }
             }
             //删除服务
@@ -414,9 +416,12 @@ public class CollectActivity extends AppCompatActivity implements GoodsCallback,
         isEdit = false;
         //刷新数据
         storeAdapter.notifyDataSetChanged();
+        Toast.makeText(this, "删除成功", Toast.LENGTH_SHORT).show();
     }
 
     private final Handler handler = new Handler(Looper.getMainLooper()) {
+        Toast toast;
+
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -427,14 +432,6 @@ public class CollectActivity extends AppCompatActivity implements GoodsCallback,
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    break;
-                case 1:
-                    Toast.makeText(CollectActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
-                    break;
-                case 2:
-                    Toast.makeText(CollectActivity.this, "购买成功", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(CollectActivity.this, OrderActivity.class);
-                    startActivity(intent);
                     break;
                 default:
                     break;
@@ -472,7 +469,8 @@ public class CollectActivity extends AppCompatActivity implements GoodsCallback,
     }
 
 
-    private void delete(int productId) {
+    private void delete(int id) {
+        Log.d(TAG, "delete: " + id);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -481,7 +479,7 @@ public class CollectActivity extends AppCompatActivity implements GoodsCallback,
 
                 // 创建Request对象
                 Request request = new Request.Builder()
-                        .url("http://mysilicon.cn/orders/delete?id=" + productId)
+                        .url("http://mysilicon.cn/orders/delete?id=" + id)
                         .post(RequestBody.create("", null))
                         .build();
                 try {

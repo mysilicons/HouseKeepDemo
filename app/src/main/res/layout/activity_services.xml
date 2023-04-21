@@ -21,25 +21,21 @@
         android:background="#ffffff"
         android:orientation="horizontal">
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/searchtext"
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchview"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:hint="输入关键字搜索"
-            android:singleLine="true"
-            android:background="@null"
-            android:textSize="18sp"
-            android:drawableLeft="@android:drawable/ic_menu_search"
-            android:imeOptions="actionSearch" />
+            android:queryHint="搜索"
+            android:textColor="#000000" />
 
         <ImageView
             android:id="@+id/iv_switch"
             android:layout_width="36dp"
             android:layout_height="36dp"
+            android:contentDescription="transform"
             android:gravity="center"
-            android:src="@drawable/img_double"
-            android:contentDescription="transform" />
+            android:src="@drawable/img_double" />
     </LinearLayout>
 
     <LinearLayout
@@ -48,7 +44,7 @@
         android:background="#ffffff"
         android:orientation="horizontal">
 
-    <androidx.recyclerview.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

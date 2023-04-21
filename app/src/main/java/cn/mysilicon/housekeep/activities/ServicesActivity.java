@@ -11,6 +11,7 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -33,6 +34,7 @@ import okhttp3.Response;
 public class ServicesActivity extends AppCompatActivity {
     private static final String TAG = "ServicesActivity";
     private RecyclerView mRvSearchResult;
+    private SearchView mSearch;
     private ImageView mIvSwitch;
     private boolean isSingle = true;
     private SearchResultAdapter mAdapterSearchResult;
@@ -155,6 +157,8 @@ public class ServicesActivity extends AppCompatActivity {
             actionBar.setHomeButtonEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+        mSearch = findViewById(R.id.searchview);
+        mSearch.setIconifiedByDefault(false);
         mRvSearchResult = findViewById(R.id.recyclerview);
         mIvSwitch = findViewById(R.id.iv_switch);
         mLayoutManager = new GridLayoutManager(this, 2);

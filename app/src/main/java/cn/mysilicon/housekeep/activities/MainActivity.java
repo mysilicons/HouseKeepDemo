@@ -72,28 +72,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    //Fragment互相切换
-
-//    public void buttonClick(View view) {
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        Fragment1 fragment1 = new Fragment1();
-//        Fragment2 fragment2 = new Fragment2();
-//        Fragment4 fragment4 = new Fragment4();
-//        switch (view.getId()) {
-//            case R.id.button1:
-//                fragmentTransaction.replace(R.id.replace, fragment1);
-//                break;
-//            case R.id.button2:
-//                fragmentTransaction.replace(R.id.replace, fragment2);
-//                break;
-//            case R.id.button3:
-//                fragmentTransaction.replace(R.id.replace, fragment4);
-//                break;
-//        }
-//        fragmentTransaction.commit();
-//    }
-
     //获取位置
     private String loadCity() {
         FileInputStream cityIn = null;
@@ -111,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 FileOutputStream cityOut = openFileOutput("locationCity", Context.MODE_PRIVATE);
                 BufferedWriter cityWriter = new BufferedWriter(new OutputStreamWriter(cityOut));
-                cityWriter.write("北京");
+                cityWriter.write("未定位");
                 cityWriter.close();
             } catch (IOException e1) {
                 e1.printStackTrace();
