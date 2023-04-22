@@ -79,4 +79,7 @@ public class ServiceItemBean {
         this.price = price;
     }
 
+    public boolean contains(String query) {
+        return title.contains(query) || content.contains(query);
+    }
 }

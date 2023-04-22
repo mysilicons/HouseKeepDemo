@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -208,6 +209,29 @@ public class ServicesActivity extends AppCompatActivity {
                 mAdapterSearchResult.notifyItemRangeChanged(firstVisibleItemPosition, mAdapterSearchResult.getItemCount());
             }
         });
+
+        mSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                List<ServiceItemBean> filteredDataList = mAdapterSearchResult.getFilter(query);
+                mRvSearchResult.setAdapter(new SearchResultAdapter(filteredDataList, ServicesActivity.this, ServicesActivity.this));
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (TextUtils.isEmpty(newText)) {
+                    List<ServiceItemBean> filteredDataList = mAdapterSearchResult.renewData();
+                    mRvSearchResult.setAdapter(new SearchResultAdapter(filteredDataList, ServicesActivity.this, ServicesActivity.this));
+                    return false;
+                } else {
+                    List<ServiceItemBean> filteredDataList = mAdapterSearchResult.getFilter(newText);
+                    mRvSearchResult.setAdapter(new SearchResultAdapter(filteredDataList, ServicesActivity.this, ServicesActivity.this));
+                    return false;
+                }
+            }
+        });
+
     }
 
     /**

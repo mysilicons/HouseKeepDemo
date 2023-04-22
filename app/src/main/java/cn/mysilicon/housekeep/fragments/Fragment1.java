@@ -48,7 +48,7 @@ public class Fragment1 extends Fragment {
     private RecyclerView mHomePageRecyclerView;
     private HomePageAdapter mHomePageAdapter;
     private List images = new ArrayList();
-
+    private Banner banner;
     private LinearLayout ll1;
     private LinearLayout ll2;
     private LinearLayout ll3;
@@ -237,7 +237,7 @@ public class Fragment1 extends Fragment {
     }
 
     private void initBanner() {
-        Banner banner = getActivity().findViewById(R.id.banner);
+        banner = getActivity().findViewById(R.id.banner);
         //设置图片加载器
         banner.setImageLoader(new BannerLoaderUtil());
         //设置图片集合

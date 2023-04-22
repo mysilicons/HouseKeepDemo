@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.mysilicon.housekeep.R;
@@ -27,7 +28,9 @@ import cn.mysilicon.housekeep.model.ServiceItemBean;
 public class SearchResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final String TAG = "SearchResultAdapter";
-    private List<ServiceItemBean> mServiceItemBeanList;
+    private final List<ServiceItemBean> mServiceItemBeanList;
+    private List<ServiceItemBean> mServiceItemBeanListFull;
+    private List<ServiceItemBean> filteredDataList = new ArrayList<>();
     private Activity mActivity;
     private int listColumn = ServicesActivity.LIST_COLUMN_SINGLE;
     private Context mContext;
@@ -109,6 +112,20 @@ public class SearchResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return mServiceItemBeanList.size();
     }
 
+    public List<ServiceItemBean> getFilter(String query) {
+        Integer i;
+        for (i = 0; i < mServiceItemBeanList.size(); i++) {
+            if (mServiceItemBeanList.get(i).contains(query)) {
+                filteredDataList.add(mServiceItemBeanList.get(i));
+            }
+        }
+        return filteredDataList;
+    }
+
+    public List<ServiceItemBean> renewData() {
+        return mServiceItemBeanList;
+    }
+
     static class ViewHolderItemSingle extends RecyclerView.ViewHolder {
 
         ImageView singleimage;
@@ -126,7 +143,6 @@ public class SearchResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     static class ViewHolderItemDouble extends RecyclerView.ViewHolder {
-
         ImageView doubleimage;
         TextView tv_1;
         TextView tv_2;
