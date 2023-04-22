@@ -39,6 +39,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         this.mServiceItemBeanList = mServiceItemBeanList;
         this.mActivity = mActivity;
         this.mContext = mContext;
+        mServiceItemBeanListFull = new ArrayList<>(mServiceItemBeanList);
     }
 
     public void setListColumn(int listColumn) {
@@ -112,18 +113,22 @@ public class SearchResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return mServiceItemBeanList.size();
     }
 
-    public List<ServiceItemBean> getFilter(String query) {
+    public void getFilter(String query) {
         Integer i;
         for (i = 0; i < mServiceItemBeanList.size(); i++) {
             if (mServiceItemBeanList.get(i).contains(query)) {
                 filteredDataList.add(mServiceItemBeanList.get(i));
             }
         }
-        return filteredDataList;
+        mServiceItemBeanList.clear();
+        mServiceItemBeanList.addAll(filteredDataList);
+        notifyDataSetChanged();
     }
 
-    public List<ServiceItemBean> renewData() {
-        return mServiceItemBeanList;
+    public void renewData() {
+        mServiceItemBeanList.clear();
+        mServiceItemBeanList.addAll(mServiceItemBeanListFull);
+        notifyDataSetChanged();
     }
 
     static class ViewHolderItemSingle extends RecyclerView.ViewHolder {

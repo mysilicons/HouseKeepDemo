@@ -213,22 +213,17 @@ public class ServicesActivity extends AppCompatActivity {
         mSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                List<ServiceItemBean> filteredDataList = mAdapterSearchResult.getFilter(query);
-                mRvSearchResult.setAdapter(new SearchResultAdapter(filteredDataList, ServicesActivity.this, ServicesActivity.this));
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
                 if (TextUtils.isEmpty(newText)) {
-                    List<ServiceItemBean> filteredDataList = mAdapterSearchResult.renewData();
-                    mRvSearchResult.setAdapter(new SearchResultAdapter(filteredDataList, ServicesActivity.this, ServicesActivity.this));
-                    return false;
+                    mAdapterSearchResult.renewData();
                 } else {
-                    List<ServiceItemBean> filteredDataList = mAdapterSearchResult.getFilter(newText);
-                    mRvSearchResult.setAdapter(new SearchResultAdapter(filteredDataList, ServicesActivity.this, ServicesActivity.this));
-                    return false;
+                    mAdapterSearchResult.getFilter(newText);
                 }
+                return false;
             }
         });
 
