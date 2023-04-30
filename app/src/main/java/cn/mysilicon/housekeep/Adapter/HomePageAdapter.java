@@ -2,6 +2,7 @@ package cn.mysilicon.housekeep.Adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,8 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder) holder;
-        String url1 = mServiceItemBeanList.get(position).getURL();
+        String url1 = mServiceItemBeanList.get(position).getImage_url();
+        Log.d(TAG, "onBindViewHolder: " + url1);
         Glide.with(mActivity).load(url1).into(viewHolder.singleimage);
         viewHolder.tv_1.setText(mServiceItemBeanList.get(position).getTitle());
         viewHolder.tv_2.setText(mServiceItemBeanList.get(position).getContent());

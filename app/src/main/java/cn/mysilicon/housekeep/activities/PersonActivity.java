@@ -29,7 +29,7 @@ import java.util.Map;
 
 import cn.mysilicon.housekeep.Adapter.AddressAdapter;
 import cn.mysilicon.housekeep.R;
-import cn.mysilicon.housekeep.model.AddressMatch;
+import cn.mysilicon.housekeep.model.Address;
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -39,7 +39,7 @@ import okhttp3.Response;
 public class PersonActivity extends AppCompatActivity {
 
     public static final String TAG = "PersonActivity";
-    private List<AddressMatch> addressesList = new ArrayList<>();
+    private List<Address> addressesList = new ArrayList<>();
 
 
     @Override
@@ -82,7 +82,7 @@ public class PersonActivity extends AppCompatActivity {
             public void run() {
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
-                        .url("http://mysilicon.cn/api/delete?username=" + username + "&password=" + password)
+                        .url("http://mysilicon.cn/user/delete?username=" + username + "&password=" + password)
                         .post(RequestBody.create("", null))
                         .build();
                 try {
@@ -189,7 +189,7 @@ public class PersonActivity extends AppCompatActivity {
 
                 // 创建Request对象
                 Request request = new Request.Builder()
-                        .url("http://mysilicon.cn/address/get?uid=" + user_id)
+                        .url("http://mysilicon.cn/address/list?uid=" + user_id)
                         .get()
                         .build();
                 Call call = client.newCall(request);
@@ -198,7 +198,7 @@ public class PersonActivity extends AppCompatActivity {
                     String result = response.body().string();
                     // 请求成功，处理结果
                     Log.d(TAG, "onResponse: " + result);
-                    addressesList = JSONArray.parseArray(result, AddressMatch.class);
+                    addressesList = JSONArray.parseArray(result, Address.class);
                     handler.sendEmptyMessage(0);
                 } catch (IOException e) {
                     e.printStackTrace();

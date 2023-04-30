@@ -21,19 +21,19 @@ import java.util.List;
 import cn.mysilicon.housekeep.R;
 import cn.mysilicon.housekeep.activities.AddressEditActivity;
 import cn.mysilicon.housekeep.activities.PersonActivity;
-import cn.mysilicon.housekeep.model.AddressMatch;
+import cn.mysilicon.housekeep.model.Address;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 
 public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHolder> {
     private static final String TAG = "AddressAdapter";
-    private List<AddressMatch> addressesList;
+    private List<Address> addressesList;
     private Activity activity;
 
     public AddressAdapter() {
     }
 
-    public AddressAdapter(List<AddressMatch> addressesList, PersonActivity personActivity) {
+    public AddressAdapter(List<Address> addressesList, PersonActivity personActivity) {
         this.addressesList = addressesList;
         this.activity = personActivity;
     }
@@ -48,7 +48,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull AddressAdapter.ViewHolder holder, int position) {
-        AddressMatch address = addressesList.get(position);
+        Address address = addressesList.get(position);
         holder.address_title_textview.setText(address.getAddress());
         holder.address_name_textview.setText(address.getUname());
         holder.address_phone_textview.setText(address.getPhone());

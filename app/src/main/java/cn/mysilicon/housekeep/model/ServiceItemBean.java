@@ -2,25 +2,26 @@ package cn.mysilicon.housekeep.model;
 
 public class ServiceItemBean {
     private Integer id;
-    private Integer category;
-    private Integer classification;
+    private Integer classification1;
+    private Integer classification2;
     private String image_url;
     private String title;
     private String content;
     private String price;
+    private String city;
 
-    public ServiceItemBean(Integer id, Integer category, Integer classification, String image_url, String title, String content, String price) {
+    public ServiceItemBean(Integer id, Integer classification1, Integer classification2, String image_url, String title, String content, String price, String city) {
         this.id = id;
-        this.category = category;
-        this.classification = classification;
+        this.classification1 = classification1;
+        this.classification2 = classification2;
         this.image_url = image_url;
         this.title = title;
         this.content = content;
         this.price = price;
+        this.city = city;
     }
 
     public ServiceItemBean() {
-
     }
 
     public Integer getId() {
@@ -31,27 +32,27 @@ public class ServiceItemBean {
         this.id = id;
     }
 
-    public Integer getCategory() {
-        return category;
+    public Integer getClassification1() {
+        return classification1;
     }
 
-    public void setCategory(Integer category) {
-        this.category = category;
+    public void setClassification1(Integer classification1) {
+        this.classification1 = classification1;
     }
 
-    public Integer getClassification() {
-        return classification;
+    public Integer getClassification2() {
+        return classification2;
     }
 
-    public void setClassification(Integer classification) {
-        this.classification = classification;
+    public void setClassification2(Integer classification2) {
+        this.classification2 = classification2;
     }
 
-    public String getURL() {
+    public String getImage_url() {
         return image_url;
     }
 
-    public void setURL(String image_url) {
+    public void setImage_url(String image_url) {
         this.image_url = image_url;
     }
 
@@ -77,6 +78,14 @@ public class ServiceItemBean {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public boolean contains(String query) {

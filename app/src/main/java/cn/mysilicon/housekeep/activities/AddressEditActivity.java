@@ -21,7 +21,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 
 import cn.mysilicon.housekeep.R;
-import cn.mysilicon.housekeep.model.AddressMatch;
+import cn.mysilicon.housekeep.model.Address;
 import okhttp3.OkHttpClient;
 
 public class AddressEditActivity extends AppCompatActivity {
@@ -72,7 +72,7 @@ public class AddressEditActivity extends AppCompatActivity {
             } else {
                 SharedPreferences sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
                 Integer user_id = sharedPreferences.getInt("user_id", 0);
-                AddressMatch new_address = new AddressMatch(id, user_id, nameStr, phoneStr, addressStr);
+                Address new_address = new Address(id, user_id, nameStr, phoneStr, addressStr);
                 //发送地址信息到服务器
                 editAddress(new_address);
             }
@@ -112,7 +112,7 @@ public class AddressEditActivity extends AppCompatActivity {
         }
     };
 
-    private void editAddress(AddressMatch newAddress) {
+    private void editAddress(Address newAddress) {
         new Thread(() -> {
             OkHttpClient client = new OkHttpClient();
             Gson gson = new Gson();

@@ -1,5 +1,6 @@
 package cn.mysilicon.housekeep.activities;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -36,8 +37,13 @@ public class OrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
+
+        //获取用户id
+        SharedPreferences sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
+        Integer user_id = sharedPreferences.getInt("user_id", 0);
+
         //获取数据
-        getData();
+        getData(user_id);
     }
 
     private final Handler handler = new Handler(Looper.getMainLooper()) {
@@ -82,13 +88,13 @@ public class OrderActivity extends AppCompatActivity {
     }
 
     //获取数据
-    private void getData() {
+    private void getData(Integer user_id) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
-                        .url("http://mysilicon.cn/myorders/all")
+                        .url("http://mysilicon.cn/order/list?user_id=" + user_id)
                         .get()
                         .build();
                 Call call = client.newCall(request);

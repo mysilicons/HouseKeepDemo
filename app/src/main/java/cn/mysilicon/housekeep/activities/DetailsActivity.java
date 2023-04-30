@@ -1,6 +1,7 @@
 package cn.mysilicon.housekeep.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -16,7 +17,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 
 import java.io.IOException;
@@ -34,8 +35,9 @@ import okhttp3.Response;
 public class DetailsActivity extends AppCompatActivity {
 
     private static final String TAG = "DetailsActivity";
-    private final List<DetailsBean> detailsBeanList = new ArrayList<>();
+    private List<DetailsBean> detailsBeanList = new ArrayList<>();
     private DetailsBean detailsBean;
+    private static Integer user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,9 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details);
         Bundle bundle = getIntent().getExtras();
         Integer id = bundle.getInt("id");
+        //获取用户id
+        SharedPreferences sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
+        user_id = sharedPreferences.getInt("user_id", 0);
         getData(id);
         initListener();
     }
@@ -64,17 +69,7 @@ public class DetailsActivity extends AppCompatActivity {
                     Response response = call.execute();
                     String result = response.body().string();
                     // 请求成功，处理结果
-                    JSONArray jsonArray = JSONArray.parseArray(result);
-                    for (int i = 0; i < jsonArray.size(); i++) {
-                        detailsBean = new DetailsBean();
-                        detailsBean.setId(jsonArray.getJSONObject(i).getInteger("id"));
-                        detailsBean.setImg(jsonArray.getJSONObject(i).getString("image_url"));
-                        detailsBean.setTitle(jsonArray.getJSONObject(i).getString("title"));
-                        detailsBean.setContent(jsonArray.getJSONObject(i).getString("content"));
-                        detailsBean.setPrice(jsonArray.getJSONObject(i).getString("price"));
-                        detailsBeanList.add(detailsBean);
-                    }
-                    Log.i(TAG, "run: " + detailsBeanList);
+                    detailsBean = JSON.parseObject(result, DetailsBean.class);
                     handler.sendEmptyMessage(0);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -117,10 +112,13 @@ public class DetailsActivity extends AppCompatActivity {
         TextView content = findViewById(R.id.service_content);
         TextView price = findViewById(R.id.service_price);
 
-        Glide.with(this).load(detailsBeanList.get(0).getImg()).into(imageView);
-        title.setText(detailsBeanList.get(0).getTitle());
-        content.setText(detailsBeanList.get(0).getContent());
-        price.setText(detailsBeanList.get(0).getPrice());
+        Log.d(TAG, "initView: " + detailsBean.getImage_url());
+        Glide.with(this).load(detailsBean.getImage_url()).into(imageView);
+
+
+        title.setText(detailsBean.getTitle());
+        content.setText(detailsBean.getContent());
+        price.setText(detailsBean.getPrice());
     }
 
     private void initListener() {
@@ -156,7 +154,7 @@ public class DetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 buy(detailsBean.getId());
-                delete(detailsBean.getId());
+//                delete(detailsBean.getId());
                 Toast.makeText(DetailsActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(DetailsActivity.this, OrderActivity.class);
                 startActivity(intent);
@@ -167,16 +165,17 @@ public class DetailsActivity extends AppCompatActivity {
 
     }
 
-    private void collect(Integer id) {
+    private void collect(Integer service_id) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 // 创建OkHttpClient对象
                 OkHttpClient client = new OkHttpClient();
-
+                String url = "http://mysilicon.cn/collect/add?user_id=" + user_id + "&service_id=" + service_id;
+                Log.d(TAG, "run: " + url);
                 // 创建Request对象
                 Request request = new Request.Builder()
-                        .url("http://mysilicon.cn/orders/add?id=" + id)
+                        .url(url)
                         .post(RequestBody.create("", null))
                         .build();
                 try {
@@ -189,16 +188,19 @@ public class DetailsActivity extends AppCompatActivity {
         }).start();
     }
 
-    private void buy(int productId) {
+    private void buy(int service_id) {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                String server_time = "2023-06-01+12:00:00";
+                String address_id = "16";
                 // 创建OkHttpClient对象
                 OkHttpClient client = new OkHttpClient();
-
+                String url = "http://mysilicon.cn/order/add?server_time=" + server_time + "&service_id=" + service_id + "&address_id=" + address_id + "&user_id=" + user_id;
+                Log.d(TAG, "run: " + url);
                 // 创建Request对象
                 Request request = new Request.Builder()
-                        .url("http://mysilicon.cn/myorders/buy?product_id=" + productId)
+                        .url(url)
                         .post(RequestBody.create("", null))
                         .build();
                 try {
@@ -211,7 +213,7 @@ public class DetailsActivity extends AppCompatActivity {
         }).start();
     }
 
-    private void delete(int productId) {
+    private void delete(int service_id) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -220,7 +222,7 @@ public class DetailsActivity extends AppCompatActivity {
 
                 // 创建Request对象
                 Request request = new Request.Builder()
-                        .url("http://mysilicon.cn/orders/delete?id=" + productId)
+                        .url("http://mysilicon.cn/order/delete?id=" + service_id)
                         .post(RequestBody.create("", null))
                         .build();
                 try {

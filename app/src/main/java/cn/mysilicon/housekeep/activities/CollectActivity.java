@@ -1,6 +1,7 @@
 package cn.mysilicon.housekeep.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -20,8 +21,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.fastjson.JSONArray;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.google.gson.Gson;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.io.IOException;
@@ -72,6 +73,7 @@ public class CollectActivity extends AppCompatActivity implements GoodsCallback,
     private SmartRefreshLayout refresh;//刷新布局
     private LinearLayout layEmpty;//空布局
     private CarResponse carResponse;
+    private static Integer user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +91,12 @@ public class CollectActivity extends AppCompatActivity implements GoodsCallback,
             actionBar.setHomeButtonEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        getData();
+
+        //获取用户id
+        SharedPreferences sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
+        user_id = sharedPreferences.getInt("user_id", 0);
+
+        getData(user_id);
     }
 
 
@@ -160,20 +167,20 @@ public class CollectActivity extends AppCompatActivity implements GoodsCallback,
                     //传递选中的id
                     if (storeBean.isChecked()) {
                         //全选服务
-                        storeAdapter.controlGoods(storeBean.getShopId(), true);
+                        storeAdapter.controlGoods(storeBean.getClassification2_id(), true);
 
                         //添加到列表中
-                        if (!shopIdList.contains(storeBean.getShopId())) {
+                        if (!shopIdList.contains(storeBean.getClassification2_id())) {
                             //如果列表中没有这个Id且当前分类为选中状态
-                            shopIdList.add(storeBean.getShopId());
+                            shopIdList.add(storeBean.getClassification2_id());
                         }
                     } else {
                         //清除全选服务
-                        storeAdapter.controlGoods(storeBean.getShopId(), false);
+                        storeAdapter.controlGoods(storeBean.getClassification2_id(), false);
 
                         //从列表中清除
-                        if (shopIdList.contains(storeBean.getShopId())) {
-                            shopIdList.remove((Integer) storeBean.getShopId());
+                        if (shopIdList.contains(storeBean.getClassification2_id())) {
+                            shopIdList.remove((Integer) storeBean.getClassification2_id());
                         }
                     }
                     //控制页面全选
@@ -216,17 +223,17 @@ public class CollectActivity extends AppCompatActivity implements GoodsCallback,
     public void checkedStore(int shopId, boolean state) {
         for (CarResponse.OrderDataBean bean : mList) {
             //遍历
-            if (shopId == bean.getShopId()) {
+            if (shopId == bean.getClassification2_id()) {
                 bean.setChecked(state);
                 storeAdapter.notifyDataSetChanged();
                 //记录选中店铺的shopid,添加到一个列表中。
-                if (!shopIdList.contains(bean.getShopId()) && state) {
+                if (!shopIdList.contains(bean.getClassification2_id()) && state) {
                     //如果列表中没有这个店铺Id且当前店铺为选中状态
-                    shopIdList.add(bean.getShopId());
+                    shopIdList.add(bean.getClassification2_id());
                 } else {
-                    if (shopIdList.contains(bean.getShopId())) {
+                    if (shopIdList.contains(bean.getClassification2_id())) {
                         //通过list.indexOf获取属性的在列表中的下标，不过强转Integer更简洁
-                        shopIdList.remove((Integer) bean.getShopId());
+                        shopIdList.remove((Integer) bean.getClassification2_id());
                     }
                 }
             }
@@ -248,8 +255,8 @@ public class CollectActivity extends AppCompatActivity implements GoodsCallback,
         for (int i = 0; i < mList.size(); i++) {
             CarResponse.OrderDataBean orderDataBean = mList.get(i);
             //循环店铺中的服务列表
-            for (int j = 0; j < orderDataBean.getCartlist().size(); j++) {
-                CarResponse.OrderDataBean.CartlistBean cartlistBean = orderDataBean.getCartlist().get(j);
+            for (int j = 0; j < orderDataBean.getCollectionList().size(); j++) {
+                CarResponse.OrderDataBean.CartlistBean cartlistBean = orderDataBean.getCollectionList().get(j);
                 //当有选中服务时计算数量和价格
                 if (cartlistBean.isChecked()) {
                     totalCount++;
@@ -345,14 +352,14 @@ public class CollectActivity extends AppCompatActivity implements GoodsCallback,
             //服务列表
             List<CarResponse.OrderDataBean.CartlistBean> goodsList = new ArrayList<>();
 
-            List<CarResponse.OrderDataBean.CartlistBean> goods = store.getCartlist();
+            List<CarResponse.OrderDataBean.CartlistBean> goods = store.getCollectionList();
             //循环店铺中的服务列表
             for (int j = 0; j < goods.size(); j++) {
                 CarResponse.OrderDataBean.CartlistBean cartlistBean = goods.get(j);
                 //当有选中服务时添加到此列表中
                 if (cartlistBean.isChecked()) {
                     goodsList.add(cartlistBean);
-                    buy(cartlistBean.getProductId());
+                    buy(cartlistBean.getService_id());
                     delete(cartlistBean.getId());
                 }
             }
@@ -392,7 +399,7 @@ public class CollectActivity extends AppCompatActivity implements GoodsCallback,
             //服务列表
             List<CarResponse.OrderDataBean.CartlistBean> goodsList = new ArrayList<>();
 
-            List<CarResponse.OrderDataBean.CartlistBean> goods = store.getCartlist();
+            List<CarResponse.OrderDataBean.CartlistBean> goods = store.getCollectionList();
             //循环店铺中的服务列表
             for (int j = 0; j < goods.size(); j++) {
                 CarResponse.OrderDataBean.CartlistBean cartlistBean = goods.get(j);
@@ -443,13 +450,13 @@ public class CollectActivity extends AppCompatActivity implements GoodsCallback,
     /**
      * 获取数据
      */
-    private void getData() {
+    private void getData(Integer user_id) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
-                        .url("http://mysilicon.cn/orders")
+                        .url("http://mysilicon.cn/collect/list?user_id=" + user_id)
                         .get()
                         .build();
                 Call call = client.newCall(request);
@@ -458,8 +465,7 @@ public class CollectActivity extends AppCompatActivity implements GoodsCallback,
                     String result = response.body().string();
                     // 请求成功，处理结果
                     Log.d(TAG, "onResponse: " + result);
-                    Gson gson = new Gson();
-                    carResponse = gson.fromJson(result, CarResponse.class);
+                    carResponse = JSONArray.parseObject(result, CarResponse.class);
                     handler.sendEmptyMessage(0);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -479,7 +485,7 @@ public class CollectActivity extends AppCompatActivity implements GoodsCallback,
 
                 // 创建Request对象
                 Request request = new Request.Builder()
-                        .url("http://mysilicon.cn/orders/delete?id=" + id)
+                        .url("http://mysilicon.cn/collect/delete?id=" + id)
                         .post(RequestBody.create("", null))
                         .build();
                 try {
@@ -492,16 +498,18 @@ public class CollectActivity extends AppCompatActivity implements GoodsCallback,
         }).start();
     }
 
-    private void buy(int productId) {
+    private void buy(int service_id) {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                String server_time = "2021-06-01 00:00:00";
+                Integer address_id = 28;
                 // 创建OkHttpClient对象
                 OkHttpClient client = new OkHttpClient();
 
                 // 创建Request对象
                 Request request = new Request.Builder()
-                        .url("http://mysilicon.cn/myorders/buy?product_id=" + productId)
+                        .url("http://mysilicon.cn/order/add?server_time=" + server_time + "&service_id=" + service_id + "&address_id=" + address_id + "&user_id=" + user_id)
                         .post(RequestBody.create("", null))
                         .build();
                 try {
@@ -526,9 +534,9 @@ public class CollectActivity extends AppCompatActivity implements GoodsCallback,
 
         for (CarResponse.OrderDataBean orderDataBean : mList) {
             //服务是否选中
-            storeAdapter.controlGoods(orderDataBean.getShopId(), state);
+            storeAdapter.controlGoods(orderDataBean.getClassification2_id(), state);
             //店铺是否选中
-            checkedStore(orderDataBean.getShopId(), state);
+            checkedStore(orderDataBean.getClassification2_id(), state);
         }
         isAllChecked = state;
     }

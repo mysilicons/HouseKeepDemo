@@ -63,7 +63,7 @@ public class ServicesActivity extends AppCompatActivity {
 
     }
 
-    private void getCategoryData(String category) {
+    private void getCategoryData(String classification1) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -72,7 +72,7 @@ public class ServicesActivity extends AppCompatActivity {
 
                 // 创建Request对象
                 Request request = new Request.Builder()
-                        .url("http://mysilicon.cn/service/category?category=" + category)
+                        .url("http://mysilicon.cn/service/classification1?classification1=" + classification1)
                         .get()
                         .build();
                 Call call = client.newCall(request);
@@ -80,17 +80,7 @@ public class ServicesActivity extends AppCompatActivity {
                     Response response = call.execute();
                     String result = response.body().string();
                     // 请求成功，处理结果
-                    JSONArray jsonArray = JSONArray.parseArray(result);
-                    for (int i = 0; i < jsonArray.size(); i++) {
-                        ServiceItemBean serviceItemBean = new ServiceItemBean();
-                        serviceItemBean.setId(jsonArray.getJSONObject(i).getInteger("id"));
-                        serviceItemBean.setClassification(jsonArray.getJSONObject(i).getInteger("classification"));
-                        serviceItemBean.setURL(jsonArray.getJSONObject(i).getString("image_url"));
-                        serviceItemBean.setTitle(jsonArray.getJSONObject(i).getString("title"));
-                        serviceItemBean.setContent(jsonArray.getJSONObject(i).getString("content"));
-                        serviceItemBean.setPrice(jsonArray.getJSONObject(i).getString("price"));
-                        ServiceItemBeanList.add(serviceItemBean);
-                    }
+                    ServiceItemBeanList = JSONArray.parseArray(result, ServiceItemBean.class);
                     handler.sendEmptyMessage(0);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -99,7 +89,7 @@ public class ServicesActivity extends AppCompatActivity {
         }).start();
     }
 
-    private void getClassificationData(String classification) {
+    private void getClassificationData(String classification2) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -108,7 +98,7 @@ public class ServicesActivity extends AppCompatActivity {
 
                 // 创建Request对象
                 Request request = new Request.Builder()
-                        .url("http://mysilicon.cn/service?classification=" + classification)
+                        .url("http://mysilicon.cn/service/classification2?classification2=" + classification2)
                         .get()
                         .build();
                 Call call = client.newCall(request);
@@ -116,17 +106,7 @@ public class ServicesActivity extends AppCompatActivity {
                     Response response = call.execute();
                     String result = response.body().string();
                     // 请求成功，处理结果
-                    JSONArray jsonArray = JSONArray.parseArray(result);
-                    for (int i = 0; i < jsonArray.size(); i++) {
-                        ServiceItemBean serviceItemBean = new ServiceItemBean();
-                        serviceItemBean.setId(jsonArray.getJSONObject(i).getInteger("id"));
-                        serviceItemBean.setClassification(jsonArray.getJSONObject(i).getInteger("classification"));
-                        serviceItemBean.setURL(jsonArray.getJSONObject(i).getString("image_url"));
-                        serviceItemBean.setTitle(jsonArray.getJSONObject(i).getString("title"));
-                        serviceItemBean.setContent(jsonArray.getJSONObject(i).getString("content"));
-                        serviceItemBean.setPrice(jsonArray.getJSONObject(i).getString("price"));
-                        ServiceItemBeanList.add(serviceItemBean);
-                    }
+                    ServiceItemBeanList = JSONArray.parseArray(result, ServiceItemBean.class);
                     handler.sendEmptyMessage(0);
                 } catch (IOException e) {
                     e.printStackTrace();

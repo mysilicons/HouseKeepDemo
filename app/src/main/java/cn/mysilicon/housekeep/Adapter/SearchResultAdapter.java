@@ -88,7 +88,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         switch (viewType) {
             case ServicesActivity.LIST_COLUMN_SINGLE:
                 ViewHolderItemSingle holderItemSingle = (ViewHolderItemSingle) holder;
-                String url1 = mServiceItemBeanList.get(position).getURL();
+                String url1 = mServiceItemBeanList.get(position).getImage_url();
                 Glide.with(mActivity).load(url1).into(holderItemSingle.singleimage);
                 Log.d(TAG, "onBindViewHolder: url1=" + url1);
                 holderItemSingle.tv_1.setText(mServiceItemBeanList.get(position).getTitle());
@@ -97,7 +97,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 break;
             case ServicesActivity.LIST_COLUMN_DOUBLE:
                 ViewHolderItemDouble holderItemDouble = (ViewHolderItemDouble) holder;
-                String url2 = mServiceItemBeanList.get(position).getURL();
+                String url2 = mServiceItemBeanList.get(position).getImage_url();
                 Glide.with(mActivity).load(url2).into(holderItemDouble.doubleimage);
                 Log.d(TAG, "onBindViewHolder: url2=" + url2);
                 holderItemDouble.tv_1.setText(mServiceItemBeanList.get(position).getTitle());

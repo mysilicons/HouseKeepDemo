@@ -244,7 +244,6 @@ public class Fragment1 extends Fragment {
         banner.setImages(images);
         //banner设置方法全部调用完毕时最后调用
         banner.start();
-        //增加点击事件
     }
 
     private final Handler handler = new Handler(Looper.getMainLooper()) {
@@ -271,7 +270,7 @@ public class Fragment1 extends Fragment {
 
                 // 创建Request对象
                 Request request = new Request.Builder()
-                        .url("http://mysilicon.cn/image/all")
+                        .url("http://mysilicon.cn/bannerimage/list")
                         .get()
                         .build();
                 Call call = client.newCall(request);
@@ -300,7 +299,7 @@ public class Fragment1 extends Fragment {
 
                 // 创建Request对象
                 Request request = new Request.Builder()
-                        .url("http://mysilicon.cn/service/all")
+                        .url("http://mysilicon.cn/service/list")
                         .get()
                         .build();
                 Call call = client.newCall(request);
@@ -308,17 +307,7 @@ public class Fragment1 extends Fragment {
                     Response response = call.execute();
                     String result = response.body().string();
                     // 请求成功，处理结果
-                    JSONArray jsonArray = JSONArray.parseArray(result);
-                    for (int i = 0; i < jsonArray.size(); i++) {
-                        ServiceItemBean serviceItemBean = new ServiceItemBean();
-                        serviceItemBean.setId(jsonArray.getJSONObject(i).getInteger("id"));
-                        serviceItemBean.setClassification(jsonArray.getJSONObject(i).getInteger("classification"));
-                        serviceItemBean.setURL(jsonArray.getJSONObject(i).getString("image_url"));
-                        serviceItemBean.setTitle(jsonArray.getJSONObject(i).getString("title"));
-                        serviceItemBean.setContent(jsonArray.getJSONObject(i).getString("content"));
-                        serviceItemBean.setPrice(jsonArray.getJSONObject(i).getString("price"));
-                        ServiceItemBeanList.add(serviceItemBean);
-                    }
+                    ServiceItemBeanList = JSONArray.parseArray(result, ServiceItemBean.class);
                     handler.sendEmptyMessage(0);
                 } catch (IOException e) {
                     e.printStackTrace();

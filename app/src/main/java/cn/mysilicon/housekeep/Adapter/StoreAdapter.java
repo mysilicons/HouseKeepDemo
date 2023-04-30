@@ -1,6 +1,5 @@
 package cn.mysilicon.housekeep.Adapter;
 
-import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -14,7 +13,6 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import java.util.List;
 
 import cn.mysilicon.housekeep.R;
-import cn.mysilicon.housekeep.activities.DetailsActivity;
 import cn.mysilicon.housekeep.model.CarResponse;
 import cn.mysilicon.housekeep.utils.GoodsCallback;
 
@@ -40,7 +38,7 @@ public class StoreAdapter extends BaseQuickAdapter<CarResponse.OrderDataBean, Ba
     @Override
     protected void convert(BaseViewHolder helper, final CarResponse.OrderDataBean item) {
         rvGood = helper.getView(R.id.rv_goods);
-        helper.setText(R.id.tv_store_name, item.getShopName());
+        helper.setText(R.id.tv_store_name, item.getClassification2_name());
 
         ImageView checkedStore = helper.getView(R.id.iv_checked_store);
         if (item.isChecked()) {
@@ -52,7 +50,7 @@ public class StoreAdapter extends BaseQuickAdapter<CarResponse.OrderDataBean, Ba
         helper.addOnClickListener(R.id.iv_checked_store);//选中店铺
 
 
-        final GoodsAdapter goodsAdapter = new GoodsAdapter(R.layout.item_good, item.getCartlist());
+        final GoodsAdapter goodsAdapter = new GoodsAdapter(R.layout.item_good, item.getCollectionList());
         rvGood.setLayoutManager(new LinearLayoutManager(mContext));
         rvGood.setAdapter(goodsAdapter);
 
@@ -60,7 +58,7 @@ public class StoreAdapter extends BaseQuickAdapter<CarResponse.OrderDataBean, Ba
         goodsAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                CarResponse.OrderDataBean.CartlistBean goodsBean = item.getCartlist().get(position);
+                CarResponse.OrderDataBean.CartlistBean goodsBean = item.getCollectionList().get(position);
                 switch (view.getId()) {
                     case R.id.iv_checked_goods://选中商品
                         //如果已选中则取消选中，未选中则选中
@@ -80,28 +78,22 @@ public class StoreAdapter extends BaseQuickAdapter<CarResponse.OrderDataBean, Ba
 
     }
 
-    private void jumpGoodsDetail(int productId) {
-        //跳转到商品详情
-        Intent intent = new Intent(mContext, DetailsActivity.class);
-        intent.putExtra("id", productId);
-        mContext.startActivity(intent);
-    }
 
     /**
      * 控制店铺是否选中
      */
     private void controlStore(CarResponse.OrderDataBean item) {
         int num = 0;
-        for (CarResponse.OrderDataBean.CartlistBean bean : item.getCartlist()) {
+        for (CarResponse.OrderDataBean.CartlistBean bean : item.getCollectionList()) {
             if (bean.isChecked()) {
                 ++num;
             }
         }
-        if (num == item.getCartlist().size()) {
+        if (num == item.getCollectionList().size()) {
             //全选中  传递需要选中的店铺的id过去
-            goodsCallback.checkedStore(item.getShopId(), true);
+            goodsCallback.checkedStore(item.getClassification2_id(), true);
         } else {
-            goodsCallback.checkedStore(item.getShopId(), false);
+            goodsCallback.checkedStore(item.getClassification2_id(), false);
         }
     }
 
@@ -112,8 +104,8 @@ public class StoreAdapter extends BaseQuickAdapter<CarResponse.OrderDataBean, Ba
         //根据店铺id选中该店铺下所有商品
         for (CarResponse.OrderDataBean orderDataBean : storeBean) {
             //店铺id等于传递过来的店铺id  则选中该店铺下所有商品
-            if (orderDataBean.getShopId() == shopId) {
-                for (CarResponse.OrderDataBean.CartlistBean cartlistBean : orderDataBean.getCartlist()) {
+            if (orderDataBean.getClassification2_id() == shopId) {
+                for (CarResponse.OrderDataBean.CartlistBean cartlistBean : orderDataBean.getCollectionList()) {
                     cartlistBean.setChecked(state);
                     //刷新
                     notifyDataSetChanged();

@@ -1,6 +1,7 @@
 package cn.mysilicon.housekeep.model;
 
 public class Address {
+    private int id;
     private int user_id;
     private String uname;
     private String phone;
@@ -14,6 +15,22 @@ public class Address {
         this.uname = uname;
         this.phone = phone;
         this.address = address;
+    }
+
+    public Address(int id, int user_id, String uname, String phone, String address) {
+        this.id = id;
+        this.user_id = user_id;
+        this.uname = uname;
+        this.phone = phone;
+        this.address = address;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getUser_id() {
@@ -47,5 +64,4 @@ public class Address {
     public void setAddress(String address) {
         this.address = address;
     }
-
 }

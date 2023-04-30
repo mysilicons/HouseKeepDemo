@@ -45,17 +45,10 @@
                 android:layout_marginLeft="50dp"
                 android:textColor="#9F9FA0"
                 android:singleLine="true"
+                android:inputType="phone"
                 android:textColorHint="#9F9FA0"
                 android:hint="手机号" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dip"
-                android:background="#83738F"
-                android:layout_marginRight="40dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"></View>
 
             <EditText
                 android:id="@+id/edt_register_password"
@@ -64,7 +57,9 @@
                 android:background="@null"
                 android:singleLine="true"
                 android:layout_gravity="center"
+                android:layout_marginTop="20dp"
                 android:hint="密码"
+                android:inputType="textPassword"
                 android:textColor="#9F9FA0"
                 android:textColorHint="#9F9FA0"
                 android:layout_marginLeft="50dp"

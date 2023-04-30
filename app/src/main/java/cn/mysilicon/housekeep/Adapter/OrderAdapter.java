@@ -68,12 +68,12 @@ public class OrderAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Order order = mOrderList.get(position);
-
-        String URL = mOrderList.get(position).getImage_url();
+        String URL = mOrderList.get(position).getImage();
+        Log.d(TAG, "onBindViewHolder: " + URL);
         Glide.with(mContext).load(URL).into(((ViewHolder) holder).img);
         ((ViewHolder) holder).order_time.setText(order.getOrder_time());
         ((ViewHolder) holder).cur_status.setText(order.getCur_status());
-        ((ViewHolder) holder).title.setText(order.getTitle());
+        ((ViewHolder) holder).title.setText(order.getName());
         ((ViewHolder) holder).price.setText(order.getPrice());
         ((ViewHolder) holder).content.setText(order.getContent());
         if (order.getCur_status().equals("进行中")) {
@@ -126,13 +126,13 @@ public class OrderAdapter extends RecyclerView.Adapter {
         }
     };
 
-    private void delete(int id) {
+    private void delete(int service_id) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
-                        .url("http://mysilicon.cn/myorders/delete?id=" + id)
+                        .url("http://mysilicon.cn/order/delete?id=" + service_id)
                         .post(RequestBody.create("", null))
                         .build();
                 try {
@@ -147,13 +147,13 @@ public class OrderAdapter extends RecyclerView.Adapter {
     }
 
 
-    private void finish(int id) {
+    private void finish(int service_id) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
-                        .url("http://mysilicon.cn/myorders/finish?id=" + id)
+                        .url("http://mysilicon.cn/order/finish?id=" + service_id)
                         .post(RequestBody.create("", null))
                         .build();
                 try {

@@ -19,6 +19,7 @@ import cn.mysilicon.housekeep.model.CarResponse;
  * @author llw
  */
 public class GoodsAdapter extends BaseQuickAdapter<CarResponse.OrderDataBean.CartlistBean, BaseViewHolder> {
+    private static final String TAG = "GoodsAdapter";
 
     public GoodsAdapter(int layoutResId, @Nullable List<CarResponse.OrderDataBean.CartlistBean> data) {
         super(layoutResId, data);
@@ -26,10 +27,11 @@ public class GoodsAdapter extends BaseQuickAdapter<CarResponse.OrderDataBean.Car
 
     @Override
     protected void convert(BaseViewHolder helper, CarResponse.OrderDataBean.CartlistBean item) {
-        helper.setText(R.id.tv_good_name, item.getProductName())
+        helper.setText(R.id.tv_good_name, item.getName())
                 .setText(R.id.tv_goods_price, item.getPrice() + "");
         ImageView goodImg = helper.getView(R.id.iv_goods);
-        Glide.with(mContext).load(item.getDefaultPic()).into(goodImg);
+        String url = item.getImage();
+        Glide.with(mContext).load(url).into(goodImg);
 
         ImageView checkedGoods = helper.getView(R.id.iv_checked_goods);
         //判断商品是否选中

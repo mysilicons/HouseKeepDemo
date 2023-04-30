@@ -2,30 +2,40 @@ package cn.mysilicon.housekeep.model;
 
 public class Order {
     private int id;
-    private int shop_id;
-    private String shop_name;
-    private int product_id;
-    private String title;
+    private long order_number;
+    private int user_id;
+    private int address_id;
+    private int classification2_id;
+    private String classification2_name;
+    private int service_id;
+    private String name;
     private String content;
     private String price;
-    private String image_url;
+    private String image;
     private String order_time;
+    private String server_time;
     private String cur_status;
+    private String address;
 
     public Order() {
     }
 
-    public Order(int id, int shop_id, String shop_name, int product_id, String title, String content, String price, String image_url, String order_time, String cur_status) {
+    public Order(int id, long order_number, int user_id, int address_id, int classification2_id, String classification2_name, int service_id, String name, String content, String price, String image, String order_time, String server_time, String cur_status, String address) {
         this.id = id;
-        this.shop_id = shop_id;
-        this.shop_name = shop_name;
-        this.product_id = product_id;
-        this.title = title;
+        this.order_number = order_number;
+        this.user_id = user_id;
+        this.address_id = address_id;
+        this.classification2_id = classification2_id;
+        this.classification2_name = classification2_name;
+        this.service_id = service_id;
+        this.name = name;
         this.content = content;
         this.price = price;
-        this.image_url = image_url;
+        this.image = image;
         this.order_time = order_time;
+        this.server_time = server_time;
         this.cur_status = cur_status;
+        this.address = address;
     }
 
     public int getId() {
@@ -36,36 +46,60 @@ public class Order {
         this.id = id;
     }
 
-    public int getShop_id() {
-        return shop_id;
+    public long getOrder_number() {
+        return order_number;
     }
 
-    public void setShop_id(int shop_id) {
-        this.shop_id = shop_id;
+    public void setOrder_number(long order_number) {
+        this.order_number = order_number;
     }
 
-    public String getShop_name() {
-        return shop_name;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setShop_name(String shop_name) {
-        this.shop_name = shop_name;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
-    public int getProduct_id() {
-        return product_id;
+    public int getAddress_id() {
+        return address_id;
     }
 
-    public void setProduct_id(int product_id) {
-        this.product_id = product_id;
+    public void setAddress_id(int address_id) {
+        this.address_id = address_id;
     }
 
-    public String getTitle() {
-        return title;
+    public int getClassification2_id() {
+        return classification2_id;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setClassification2_id(int classification2_id) {
+        this.classification2_id = classification2_id;
+    }
+
+    public String getClassification2_name() {
+        return classification2_name;
+    }
+
+    public void setClassification2_name(String classification2_name) {
+        this.classification2_name = classification2_name;
+    }
+
+    public int getService_id() {
+        return service_id;
+    }
+
+    public void setService_id(int service_id) {
+        this.service_id = service_id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getContent() {
@@ -84,12 +118,12 @@ public class Order {
         this.price = price;
     }
 
-    public String getImage_url() {
-        return image_url;
+    public String getImage() {
+        return image;
     }
 
-    public void setImage_url(String image_url) {
-        this.image_url = image_url;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getOrder_time() {
@@ -100,6 +134,14 @@ public class Order {
         this.order_time = order_time;
     }
 
+    public String getServer_time() {
+        return server_time;
+    }
+
+    public void setServer_time(String server_time) {
+        this.server_time = server_time;
+    }
+
     public String getCur_status() {
         return cur_status;
     }
@@ -108,4 +150,11 @@ public class Order {
         this.cur_status = cur_status;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }

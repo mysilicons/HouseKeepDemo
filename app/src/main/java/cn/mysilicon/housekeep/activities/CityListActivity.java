@@ -719,7 +719,6 @@ public class CityListActivity extends AppCompatActivity implements AbsListView.O
     }
 
 
-
     /**
      * 定位
      */

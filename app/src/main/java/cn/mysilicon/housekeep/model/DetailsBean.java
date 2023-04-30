@@ -2,14 +2,14 @@ package cn.mysilicon.housekeep.model;
 
 public class DetailsBean {
     private Integer id;
-    private String img;
+    private String image_url;
     private String title;
     private String content;
     private String price;
 
-    public DetailsBean(Integer id, String img, String title, String content) {
+    public DetailsBean(Integer id, String image_url, String title, String content, String price) {
         this.id = id;
-        this.img = img;
+        this.image_url = image_url;
         this.title = title;
         this.content = content;
         this.price = price;
@@ -27,12 +27,12 @@ public class DetailsBean {
         this.id = id;
     }
 
-    public String getImg() {
-        return img;
+    public String getImage_url() {
+        return image_url;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
 
     public String getTitle() {

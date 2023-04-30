@@ -2,13 +2,13 @@ package cn.mysilicon.housekeep.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
@@ -70,8 +70,9 @@ public class HomeItemAdapter extends BaseAdapter {
             viewHold = (ViewHold) convertView.getTag();
         }
         viewHold.tv_name.setText(subcategory.getTitle());
-        Uri uri = Uri.parse(subcategory.getImgURL());
-        viewHold.iv_icon.setImageURI(uri);
+        String img = subcategory.getImgURL();
+        //设置本地图片
+        Glide.with(context).load(img).into(viewHold.iv_icon);
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
