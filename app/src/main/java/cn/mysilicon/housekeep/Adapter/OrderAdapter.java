@@ -1,6 +1,8 @@
 package cn.mysilicon.housekeep.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -21,6 +23,7 @@ import java.io.IOException;
 import java.util.List;
 
 import cn.mysilicon.housekeep.R;
+import cn.mysilicon.housekeep.activities.OrderDetailActivity;
 import cn.mysilicon.housekeep.model.Order;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -97,6 +100,17 @@ public class OrderAdapter extends RecyclerView.Adapter {
             });
             ((ViewHolder) holder).finish.setText("删除");
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, OrderDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", order.getId());
+                intent.putExtras(bundle);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     private void fresh(int position) {

@@ -188,7 +188,7 @@ public class DetailsActivity extends AppCompatActivity {
                         .build();
                 Response response = null;
                 try {
-                    client.newCall(request).execute();
+                    response = client.newCall(request).execute();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
