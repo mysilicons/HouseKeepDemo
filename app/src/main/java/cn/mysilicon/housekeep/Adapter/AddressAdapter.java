@@ -24,6 +24,7 @@ import cn.mysilicon.housekeep.activities.PersonActivity;
 import cn.mysilicon.housekeep.model.Address;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHolder> {
     private static final String TAG = "AddressAdapter";
@@ -107,12 +108,18 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
                         .url(url)
                         .post(RequestBody.create("", null))
                         .build();
+                Response response = null;
                 try {
-                    okhttp3.Response response = client.newCall(request).execute();
-                    handler.sendEmptyMessage(1);
+                    response = client.newCall(request).execute();
                 } catch (Exception e) {
                     e.printStackTrace();
-                    handler.sendEmptyMessage(2);
+                }
+                if (response.code() != 200) {
+                    Looper.prepare();
+                    Toast.makeText(activity, "网络错误", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                } else {
+                    handler.sendEmptyMessage(1);
                 }
             }
         }).start();
@@ -131,8 +138,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
                 case 1:
                     Toast.makeText(activity, "删除成功", Toast.LENGTH_SHORT).show();
                     break;
-                case 2:
-                    Toast.makeText(activity, "删除失败", Toast.LENGTH_SHORT).show();
+                default:
                     break;
             }
         }

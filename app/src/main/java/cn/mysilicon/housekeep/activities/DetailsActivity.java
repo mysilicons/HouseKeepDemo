@@ -65,14 +65,22 @@ public class DetailsActivity extends AppCompatActivity {
                         .get()
                         .build();
                 Call call = client.newCall(request);
+                Response response = null;
+                String result = null;
                 try {
-                    Response response = call.execute();
-                    String result = response.body().string();
+                    response = call.execute();
+                    result = response.body().string();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if (response.code() != 200) {
+                    Looper.prepare();
+                    Toast.makeText(DetailsActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                } else {
                     // 请求成功，处理结果
                     detailsBean = JSON.parseObject(result, DetailsBean.class);
                     handler.sendEmptyMessage(0);
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
             }
         }).start();
@@ -178,12 +186,19 @@ public class DetailsActivity extends AppCompatActivity {
                         .url(url)
                         .post(RequestBody.create("", null))
                         .build();
+                Response response = null;
                 try {
                     client.newCall(request).execute();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                handler.sendEmptyMessage(1);
+                if (response.code() != 200) {
+                    Looper.prepare();
+                    Toast.makeText(DetailsActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                } else {
+                    handler.sendEmptyMessage(1);
+                }
             }
         }).start();
     }
@@ -203,12 +218,20 @@ public class DetailsActivity extends AppCompatActivity {
                         .url(url)
                         .post(RequestBody.create("", null))
                         .build();
+                Response response = null;
                 try {
-                    client.newCall(request).execute();
+                    response = client.newCall(request).execute();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                handler.sendEmptyMessage(2);
+                if (response.code() != 200) {
+                    Looper.prepare();
+                    Toast.makeText(DetailsActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                } else {
+                    handler.sendEmptyMessage(2);
+                }
+
             }
         }).start();
     }
@@ -225,12 +248,19 @@ public class DetailsActivity extends AppCompatActivity {
                         .url("http://mysilicon.cn/order/delete?id=" + service_id)
                         .post(RequestBody.create("", null))
                         .build();
+                Response response = null;
                 try {
-                    client.newCall(request).execute();
+                    response = client.newCall(request).execute();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                handler.sendEmptyMessage(1);
+                if (response.code() != 200) {
+                    Looper.prepare();
+                    Toast.makeText(DetailsActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                } else {
+                    handler.sendEmptyMessage(1);
+                }
             }
         }).start();
     }

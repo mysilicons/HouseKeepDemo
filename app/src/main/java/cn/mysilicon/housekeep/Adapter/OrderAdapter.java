@@ -135,13 +135,20 @@ public class OrderAdapter extends RecyclerView.Adapter {
                         .url("http://mysilicon.cn/order/delete?id=" + service_id)
                         .post(RequestBody.create("", null))
                         .build();
+                Response response = null;
                 try {
-                    Response response = client.newCall(request).execute();
+                    response = client.newCall(request).execute();
                     Log.d(TAG, "run: " + response.body().string());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                handler.sendEmptyMessage(1);
+                if (response.code() != 200) {
+                    Looper.prepare();
+                    Toast.makeText(mContext, "网络错误", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                } else {
+                    handler.sendEmptyMessage(1);
+                }
             }
         }).start();
     }
@@ -156,13 +163,21 @@ public class OrderAdapter extends RecyclerView.Adapter {
                         .url("http://mysilicon.cn/order/finish?id=" + service_id)
                         .post(RequestBody.create("", null))
                         .build();
+                Response response = null;
                 try {
-                    Response response = client.newCall(request).execute();
+                    response = client.newCall(request).execute();
                     Log.d(TAG, "run: " + response.body().string());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                handler.sendEmptyMessage(0);
+                if (response.code() != 200) {
+                    Looper.prepare();
+                    Toast.makeText(mContext, "网络错误", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                } else {
+                    handler.sendEmptyMessage(0);
+                }
+
             }
         }).start();
     }

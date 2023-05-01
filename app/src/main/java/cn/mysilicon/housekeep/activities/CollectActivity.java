@@ -460,15 +460,24 @@ public class CollectActivity extends AppCompatActivity implements GoodsCallback,
                         .get()
                         .build();
                 Call call = client.newCall(request);
+                Response response = null;
+                String result = null;
                 try {
-                    Response response = call.execute();
-                    String result = response.body().string();
+                    response = call.execute();
+                    result = response.body().string();
                     // 请求成功，处理结果
                     Log.d(TAG, "onResponse: " + result);
-                    carResponse = JSONArray.parseObject(result, CarResponse.class);
-                    handler.sendEmptyMessage(0);
+
                 } catch (IOException e) {
                     e.printStackTrace();
+                }
+                if (response.code() != 200) {
+                    Looper.prepare();
+                    Toast.makeText(CollectActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                } else {
+                    carResponse = JSONArray.parseObject(result, CarResponse.class);
+                    handler.sendEmptyMessage(0);
                 }
             }
         }).start();
@@ -488,12 +497,19 @@ public class CollectActivity extends AppCompatActivity implements GoodsCallback,
                         .url("http://mysilicon.cn/collect/delete?id=" + id)
                         .post(RequestBody.create("", null))
                         .build();
+                Response response = null;
                 try {
-                    client.newCall(request).execute();
+                    response = client.newCall(request).execute();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                handler.sendEmptyMessage(1);
+                if (response.code() != 200) {
+                    Looper.prepare();
+                    Toast.makeText(CollectActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                } else {
+                    handler.sendEmptyMessage(1);
+                }
             }
         }).start();
     }
@@ -512,12 +528,19 @@ public class CollectActivity extends AppCompatActivity implements GoodsCallback,
                         .url("http://mysilicon.cn/order/add?server_time=" + server_time + "&service_id=" + service_id + "&address_id=" + address_id + "&user_id=" + user_id)
                         .post(RequestBody.create("", null))
                         .build();
+                Response response = null;
                 try {
-                    client.newCall(request).execute();
+                    response = client.newCall(request).execute();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                handler.sendEmptyMessage(2);
+                if (response.code() != 200) {
+                    Looper.prepare();
+                    Toast.makeText(CollectActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                } else {
+                    handler.sendEmptyMessage(2);
+                }
             }
         }).start();
     }

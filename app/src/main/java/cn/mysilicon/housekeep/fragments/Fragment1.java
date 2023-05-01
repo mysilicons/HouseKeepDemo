@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -274,17 +275,25 @@ public class Fragment1 extends Fragment {
                         .get()
                         .build();
                 Call call = client.newCall(request);
+                Response response = null;
+                String result = null;
                 try {
-                    Response response = call.execute();
-                    String result = response.body().string();
+                    response = call.execute();
+                    result = response.body().string();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if (response.code() != 200) {
+                    Looper.prepare();
+                    Toast.makeText(getActivity(), "网络错误", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                } else {
                     // 请求成功，处理结果
                     JSONArray jsonArray = JSONArray.parseArray(result);
                     for (int i = 0; i < jsonArray.size(); i++) {
                         images.add(jsonArray.getJSONObject(i).getString("url"));
                     }
                     handler.sendEmptyMessage(1);
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
             }
         }).start();
@@ -303,14 +312,22 @@ public class Fragment1 extends Fragment {
                         .get()
                         .build();
                 Call call = client.newCall(request);
+                Response response = null;
+                String result = null;
                 try {
-                    Response response = call.execute();
-                    String result = response.body().string();
+                    response = call.execute();
+                    result = response.body().string();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if (response.code() != 200) {
+                    Looper.prepare();
+                    Toast.makeText(getActivity(), "网络错误", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                } else {
                     // 请求成功，处理结果
                     ServiceItemBeanList = JSONArray.parseArray(result, ServiceItemBean.class);
                     handler.sendEmptyMessage(0);
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
             }
         }).start();

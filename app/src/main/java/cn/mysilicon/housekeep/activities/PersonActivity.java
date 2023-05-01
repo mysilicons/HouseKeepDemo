@@ -85,12 +85,19 @@ public class PersonActivity extends AppCompatActivity {
                         .url("http://mysilicon.cn/user/delete?username=" + username + "&password=" + password)
                         .post(RequestBody.create("", null))
                         .build();
+                Response response = null;
                 try {
-                    client.newCall(request).execute();
+                    response = client.newCall(request).execute();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                handler.sendEmptyMessage(1);
+                if (response.code() != 200) {
+                    Looper.prepare();
+                    Toast.makeText(PersonActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                } else {
+                    handler.sendEmptyMessage(1);
+                }
             }
         }).start();
     }
@@ -193,15 +200,24 @@ public class PersonActivity extends AppCompatActivity {
                         .get()
                         .build();
                 Call call = client.newCall(request);
+                Response response = null;
+                String result = null;
                 try {
-                    Response response = call.execute();
-                    String result = response.body().string();
+                    response = call.execute();
+                    result = response.body().string();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if (response.code() != 200) {
+                    Looper.prepare();
+                    Toast.makeText(PersonActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                } else {
                     // 请求成功，处理结果
                     Log.d(TAG, "onResponse: " + result);
                     addressesList = JSONArray.parseArray(result, Address.class);
                     handler.sendEmptyMessage(0);
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
             }
         }).start();

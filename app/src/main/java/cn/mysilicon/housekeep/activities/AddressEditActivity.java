@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +22,7 @@ import java.io.IOException;
 import cn.mysilicon.housekeep.R;
 import cn.mysilicon.housekeep.model.Address;
 import okhttp3.OkHttpClient;
+import okhttp3.Response;
 
 public class AddressEditActivity extends AppCompatActivity {
     private static final String TAG = "AddressEditActivity";
@@ -105,8 +105,7 @@ public class AddressEditActivity extends AppCompatActivity {
                     Toast.makeText(AddressEditActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
                     finish();
                     break;
-                case 1:
-                    Toast.makeText(AddressEditActivity.this, "保存失败", Toast.LENGTH_SHORT).show();
+                default:
                     break;
             }
         }
@@ -122,14 +121,19 @@ public class AddressEditActivity extends AppCompatActivity {
                     .url("http://mysilicon.cn/address/edit")
                     .post(requestBody)
                     .build();
+            Response response = null;
             try {
-                okhttp3.Response response = client.newCall(request).execute();
-                String responseData = response.body().string();
-                Log.d(TAG, "Response: " + responseData);
-                handler.sendEmptyMessage(0);
+                response = client.newCall(request).execute();
+                String result = response.body().string();
             } catch (IOException e) {
                 e.printStackTrace();
-                handler.sendEmptyMessage(1);
+            }
+            if (response.code() != 200) {
+                Looper.prepare();
+                Toast.makeText(AddressEditActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
+                Looper.loop();
+            } else {
+                handler.sendEmptyMessage(0);
             }
         }).start();
     }

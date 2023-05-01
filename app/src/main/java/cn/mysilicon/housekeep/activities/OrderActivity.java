@@ -7,6 +7,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.alibaba.fastjson.JSONObject;
-import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.List;
@@ -98,16 +98,23 @@ public class OrderActivity extends AppCompatActivity {
                         .get()
                         .build();
                 Call call = client.newCall(request);
+                Response response = null;
+                String result = null;
                 try {
-                    Response response = call.execute();
-                    String result = response.body().string();
-                    // 请求成功，处理结果
-                    Log.d(TAG, "onResponse: " + result);
-                    Gson gson = new Gson();
-                    orderList = JSONObject.parseArray(result, Order.class);
-                    handler.sendEmptyMessage(0);
+                    response = call.execute();
+                    result = response.body().string();
                 } catch (IOException e) {
                     e.printStackTrace();
+                }
+                if (response.code() != 200) {
+                    Looper.prepare();
+                    Toast.makeText(OrderActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                } else {
+                    // 请求成功，处理结果
+                    Log.d(TAG, "onResponse: " + result);
+                    orderList = JSONObject.parseArray(result, Order.class);
+                    handler.sendEmptyMessage(0);
                 }
             }
         }).start();
