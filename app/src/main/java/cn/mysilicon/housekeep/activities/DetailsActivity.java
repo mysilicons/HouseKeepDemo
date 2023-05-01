@@ -94,7 +94,6 @@ public class DetailsActivity extends AppCompatActivity {
                 case 0:
                     initView();
                     break;
-
                 case 1:
                     Toast.makeText(DetailsActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
                     break;
@@ -161,10 +160,10 @@ public class DetailsActivity extends AppCompatActivity {
         findViewById(R.id.pay).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buy(detailsBean.getId());
+//                buy(detailsBean.getId());
 //                delete(detailsBean.getId());
-                Toast.makeText(DetailsActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(DetailsActivity.this, OrderActivity.class);
+                Intent intent = new Intent(DetailsActivity.this, PreOrderActivity.class);
+                intent.putExtra("id", detailsBean.getId());
                 startActivity(intent);
             }
 
@@ -199,39 +198,6 @@ public class DetailsActivity extends AppCompatActivity {
                 } else {
                     handler.sendEmptyMessage(1);
                 }
-            }
-        }).start();
-    }
-
-    private void buy(int service_id) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String server_time = "2023-06-01+12:00:00";
-                String address_id = "16";
-                // 创建OkHttpClient对象
-                OkHttpClient client = new OkHttpClient();
-                String url = "http://mysilicon.cn/order/add?server_time=" + server_time + "&service_id=" + service_id + "&address_id=" + address_id + "&user_id=" + user_id;
-                Log.d(TAG, "run: " + url);
-                // 创建Request对象
-                Request request = new Request.Builder()
-                        .url(url)
-                        .post(RequestBody.create("", null))
-                        .build();
-                Response response = null;
-                try {
-                    response = client.newCall(request).execute();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                if (response.code() != 200) {
-                    Looper.prepare();
-                    Toast.makeText(DetailsActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
-                    Looper.loop();
-                } else {
-                    handler.sendEmptyMessage(2);
-                }
-
             }
         }).start();
     }
