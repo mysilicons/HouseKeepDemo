@@ -2,6 +2,7 @@ package cn.mysilicon.housekeep.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +13,14 @@ import android.widget.SimpleAdapter;
 
 import androidx.fragment.app.Fragment;
 
+import com.hyphenate.EMValueCallBack;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMConversation;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import cn.mysilicon.housekeep.R;
@@ -31,15 +37,16 @@ public class Fragment3 extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String TAG = "Fragment3";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     private ListView listView;
-    private ArrayAdapter<String> arr_adapter;
     private SimpleAdapter simp_adapter;
-    private List<Map<String, Object>> dataList;//SimpleAdapter的data
+    private List<Map<String, Object>> dataList = new ArrayList<Map<String, Object>>();
+    private Map<String, EMConversation> localvalue;
 
     public Fragment3() {
         // Required empty public constructor
@@ -82,7 +89,31 @@ public class Fragment3 extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        listView = (ListView) getActivity().findViewById(R.id.message_list);
+        listView = getActivity().findViewById(R.id.message_list);
+
+
+        // 异步方法。同步方法为 fetchConversationsFromServer()。
+        // pageNum：当前页面，从 1 开始。
+        // pageSize：每页获取的会话数量。取值范围为 [1,20]。
+        if (EMClient.getInstance().chatManager().getAllConversations().isEmpty()) {
+            EMClient.getInstance().chatManager().asyncFetchConversationsFromServer(new EMValueCallBack<Map<String, EMConversation>>() {
+                @Override
+                public void onSuccess(Map<String, EMConversation> value) {
+                    localvalue = value;
+                    dataList = getData(localvalue);
+                }
+
+                @Override
+                public void onError(int error, String errorMsg) {
+
+                }
+            });
+        }
+        localvalue = EMClient.getInstance().chatManager().getAllConversations();
+        dataList = getData(localvalue);
+
+
+
         //1.新建一个数据适配器
         //ArrayAdapter（上下文，当前listView加载的每一个列表项所对应的布局文件，数据源）
         //2.适配器加载数据源
@@ -95,39 +126,33 @@ public class Fragment3 extends Fragment {
          * 4.from：Map中的键名
          * 3.to：绑定数据视图中的ID，与from对应关系
          * */
-        dataList = new ArrayList<Map<String, Object>>();
-        simp_adapter = new SimpleAdapter(this.getContext(), getData(), R.layout.message_item, new String[]{"pic", "text"}, new int[]{R.id.pic, R.id.text});
+        simp_adapter = new SimpleAdapter(this.getContext(), dataList, R.layout.message_item, new String[]{"pic", "name", "text"}, new int[]{R.id.pic, R.id.name, R.id.text});
         //3.视图加载适配器
-        //listView.setAdapter(arr_adapter);
         listView.setAdapter(simp_adapter);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String name = dataList.get(position).get("name").toString();
+                Log.d(TAG,name);
                 //传递数据
                 Intent intent = new Intent(getActivity(), MessageActivity.class);
-                intent.putExtra("object", position);
+                intent.putExtra("name", name);
                 startActivity(intent);
             }
         });
+
+        simp_adapter.notifyDataSetChanged();
     }
 
-    private List<Map<String, Object>> getData() {
-        Map<String, Object> map1 = new HashMap<String, Object>();
-        map1.put("pic", R.drawable.icon1);
-        map1.put("text", "客服消息");
-        dataList.add(map1);
-        Map<String, Object> map2 = new HashMap<String, Object>();
-        map2.put("pic", R.drawable.icon2);
-        map2.put("text", "全屋保洁");
-        dataList.add(map2);
-        Map<String, Object> map3 = new HashMap<String, Object>();
-        map3.put("pic", R.drawable.icon3);
-        map3.put("text", "家电清洁");
-        dataList.add(map3);
-        Map<String, Object> map4 = new HashMap<String, Object>();
-        map4.put("pic", R.drawable.icon4);
-        map4.put("text", "育儿保姆");
-        dataList.add(map4);
+    private List<Map<String, Object>> getData(Map<String, EMConversation> value) {
+        for (EMConversation conversation : value.values()) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("pic", R.drawable.icon1);
+            map.put("name", conversation.conversationId());
+            map.put("text", conversation.getLastMessage().getBody().toString());
+            dataList.add(map);
+        }
         return dataList;
     }
 

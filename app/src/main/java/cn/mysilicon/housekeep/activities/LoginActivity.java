@@ -21,6 +21,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -126,6 +128,27 @@ public class LoginActivity extends AppCompatActivity {
                     });
                     requestQueue.add(jsonObjectRequest);
                 }
+
+                EMClient.getInstance().login(usernameStr, passwordStr, new EMCallBack() {
+                    // 登录成功回调
+                    @Override
+                    public void onSuccess() {
+
+                    }
+
+                    // 登录失败回调，包含错误信息
+                    @Override
+                    public void onError(final int code, final String error) {
+
+                    }
+
+                    @Override
+                    public void onProgress(int i, String s) {
+
+                    }
+
+                });
+
 
             }
         });

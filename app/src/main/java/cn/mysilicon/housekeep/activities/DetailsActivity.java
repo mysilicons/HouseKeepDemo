@@ -38,6 +38,7 @@ public class DetailsActivity extends AppCompatActivity {
     private List<DetailsBean> detailsBeanList = new ArrayList<>();
     private DetailsBean detailsBean;
     private static Integer user_id;
+    private String merchant_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +98,11 @@ public class DetailsActivity extends AppCompatActivity {
                 case 1:
                     Toast.makeText(DetailsActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
                     break;
+                case 2:
+                    merchant_name = (String) msg.obj;
+                    break;
+                default:
+                    break;
             }
         }
     };
@@ -126,6 +132,8 @@ public class DetailsActivity extends AppCompatActivity {
         title.setText(detailsBean.getTitle());
         content.setText(detailsBean.getContent());
         price.setText(detailsBean.getPrice());
+
+        getConversationId(detailsBean.getMerchant_id());
     }
 
     private void initListener() {
@@ -149,9 +157,8 @@ public class DetailsActivity extends AppCompatActivity {
         findViewById(R.id.conect_seller).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //拨打电话
-                Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(android.net.Uri.parse("tel:028-88888888"));
+                Intent intent = new Intent(DetailsActivity.this, MessageActivity.class);
+                intent.putExtra("name", merchant_name);
                 startActivity(intent);
             }
 
@@ -170,6 +177,35 @@ public class DetailsActivity extends AppCompatActivity {
             ;
         });
 
+    }
+
+    private void getConversationId(Integer merchant_id) {
+        new Thread(() -> {
+            // 创建OkHttpClient对象
+            OkHttpClient client = new OkHttpClient();
+            String url = "http://mysilicon.cn/merchant/getConversationId?merchant_id=" + merchant_id;
+            // 创建Request对象
+            Request request = new Request.Builder()
+                    .url(url)
+                    .get()
+                    .build();
+            Call call = client.newCall(request);
+            Response response = null;
+            String result = null;
+            try {
+                response = call.execute();
+                result = response.body().string();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (response.code() != 200) {
+                Looper.prepare();
+                Toast.makeText(DetailsActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
+                Looper.loop();
+            } else {
+                handler.sendMessage(handler.obtainMessage(2, result));
+            }
+        }).start();
     }
 
     private void collect(Integer service_id) {

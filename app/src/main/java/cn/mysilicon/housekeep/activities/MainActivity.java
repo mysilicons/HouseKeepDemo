@@ -15,6 +15,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMOptions;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -35,6 +37,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Context context = getApplicationContext();
+        EMOptions options = new EMOptions();
+        options.setAppKey("1140230503163929#demo");
+        // 其他 EMOptions 配置。
+        EMClient.getInstance().init(context, options);
+
         //判断是否有权限
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
