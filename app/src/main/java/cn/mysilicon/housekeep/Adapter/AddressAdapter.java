@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -67,12 +68,18 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
             }
         });
 
-        holder.address_delete_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteAddress(address.getId());
-                removeAddress(position);
-            }
+        holder.address_delete_button.setOnClickListener(v -> {
+            AlertDialog alertDialog = new AlertDialog.Builder(activity)
+                    .setTitle("提示")
+                    .setMessage("确定要删除吗？")
+                    .setPositiveButton("确定", (dialog, which) -> {
+                        deleteAddress(address.getId());
+                        removeAddress(position);
+                    })
+                    .setNegativeButton("取消", (dialog, which) -> {
+                    })
+                    .create();
+            alertDialog.show();
         });
     }
 

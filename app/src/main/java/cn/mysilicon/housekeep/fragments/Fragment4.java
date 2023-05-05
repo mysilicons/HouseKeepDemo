@@ -11,8 +11,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import cn.mysilicon.housekeep.CommentActivity;
 import cn.mysilicon.housekeep.R;
 import cn.mysilicon.housekeep.activities.CollectActivity;
 import cn.mysilicon.housekeep.activities.LoginActivity;
@@ -34,6 +36,7 @@ public class Fragment4 extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private Integer user_id;
 
     public Fragment4() {
         // Required empty public constructor
@@ -76,9 +79,11 @@ public class Fragment4 extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         TextView person_info = requireActivity().findViewById(R.id.person_info);
         TextView my_order = requireActivity().findViewById(R.id.my_order);
         TextView my_collect = requireActivity().findViewById(R.id.my_collect);
+        TextView my_comment = requireActivity().findViewById(R.id.my_comment);
         TextView after_sale = requireActivity().findViewById(R.id.after_sale);
         TextView logout = requireActivity().findViewById(R.id.logout);
         //点击个人信息
@@ -99,24 +104,46 @@ public class Fragment4 extends Fragment {
             Intent intent = new Intent(getActivity(), CollectActivity.class);
             startActivity(intent);
         });
+        //点击我的评价
+        my_comment.setOnClickListener(v -> {
+            //跳转到我的评价页面
+            Intent intent = new Intent(getActivity(), CommentActivity.class);
+            startActivity(intent);
+        });
         //点击售后
         after_sale.setOnClickListener(v -> {
-            //跳转到售后页面
-            Intent intent = new Intent(Intent.ACTION_DIAL);
-            intent.setData(Uri.parse("tel:028-88888888"));
-            Toast.makeText(getActivity(), "请拨打售后客服电话：028-88888888", Toast.LENGTH_SHORT).show();
-            startActivity(intent);
+            AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
+                    .setTitle("提示")
+                    .setMessage("是否拨打售后客服电话：028-88888888")
+                    .setPositiveButton("确定", (dialog, which) -> {
+                        //跳转到售后页面
+                        Intent intent = new Intent(Intent.ACTION_DIAL);
+                        intent.setData(Uri.parse("tel:028-88888888"));
+                        Toast.makeText(getActivity(), "请拨打售后客服电话：028-88888888", Toast.LENGTH_SHORT).show();
+                        startActivity(intent);
+                    })
+                    .create();
+            alertDialog.show();
         });
         //点击退出登录
         logout.setOnClickListener(v -> {
-            //跳转到登录页面
-            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean("isLogin", false);
-            editor.apply();
-            Intent intent = new Intent(getActivity(), LoginActivity.class);
-            startActivity(intent);
-            getActivity().finish();
+            AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
+                    .setTitle("提示")
+                    .setMessage("确定退出登录吗？")
+                    .setPositiveButton("确定", (dialog, which) -> {
+                        //跳转到登录页面
+                        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("isLogin", false);
+                        editor.apply();
+                        Intent intent = new Intent(getActivity(), LoginActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
+                    })
+                    .setNegativeButton("取消", (dialog, which) -> {
+                    })
+                    .create();
+            alertDialog.show();
         });
     }
 }

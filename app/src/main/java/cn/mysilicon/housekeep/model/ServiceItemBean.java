@@ -9,6 +9,7 @@ public class ServiceItemBean {
     private String content;
     private String price;
     private String city;
+    private Integer merchant_id;
 
     public ServiceItemBean(Integer id, Integer classification1, Integer classification2, String image_url, String title, String content, String price, String city) {
         this.id = id;
@@ -19,6 +20,18 @@ public class ServiceItemBean {
         this.content = content;
         this.price = price;
         this.city = city;
+    }
+
+    public ServiceItemBean(Integer id, Integer classification1, Integer classification2, String image_url, String title, String content, String price, String city, Integer merchant_id) {
+        this.id = id;
+        this.classification1 = classification1;
+        this.classification2 = classification2;
+        this.image_url = image_url;
+        this.title = title;
+        this.content = content;
+        this.price = price;
+        this.city = city;
+        this.merchant_id = merchant_id;
     }
 
     public ServiceItemBean() {
@@ -86,6 +99,14 @@ public class ServiceItemBean {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public Integer getMerchant_id() {
+        return merchant_id;
+    }
+
+    public void setMerchant_id(Integer merchant_id) {
+        this.merchant_id = merchant_id;
     }
 
     public boolean contains(String query) {

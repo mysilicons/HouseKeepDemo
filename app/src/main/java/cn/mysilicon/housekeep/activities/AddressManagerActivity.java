@@ -1,12 +1,12 @@
 package cn.mysilicon.housekeep.activities;
 
-import static android.os.SystemClock.sleep;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,7 +29,7 @@ import java.io.IOException;
 import cn.mysilicon.housekeep.R;
 import cn.mysilicon.housekeep.model.Address;
 import cn.mysilicon.housekeep.utils.JDCityPicker;
-import okhttp3.Callback;
+import okhttp3.Call;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -112,15 +112,7 @@ public class AddressManagerActivity extends AppCompatActivity {
                     SharedPreferences sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
                     Integer user_id = sharedPreferences.getInt("user_id", 0);
                     address1 = new Address(user_id, nameStr, phoneStr, finalAddress);
-                    //发送地址信息到服务器
-                    try {
-                        sendAddress(address1);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    sleep(500);
-                    Toast.makeText(AddressManagerActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
-                    finish();
+                    sendAddress(address1);
                 }
             }
         });
@@ -152,40 +144,55 @@ public class AddressManagerActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void sendAddress(Address address) throws IOException {
+    final Handler handler = new Handler(Looper.getMainLooper()) {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    Toast.makeText(AddressManagerActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
+                    finish();
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
-        // 创建OkHttpClient对象
-        OkHttpClient client = new OkHttpClient();
 
-        // 创建RequestBody对象
-        Gson gson = new Gson();
-        String json = gson.toJson(address);
-        RequestBody requestBody = RequestBody.create(
-                MediaType.parse("application/json"), json);
+    private void sendAddress(Address address) {
+        new Thread(() -> {
+            // 创建OkHttpClient对象
+            OkHttpClient client = new OkHttpClient();
 
-        // 创建Request对象
-        Request request = new Request.Builder()
-                .url("http://mysilicon.cn/address/add")
-                .post(requestBody)
-                .build();
+            // 创建RequestBody对象
+            Gson gson = new Gson();
+            String json = gson.toJson(address);
+            RequestBody requestBody = RequestBody.create(
+                    MediaType.parse("application/json"), json);
 
-        // 发送请求并处理响应
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(okhttp3.Call call, IOException e) {
+            // 创建Request对象
+            Request request = new Request.Builder()
+                    .url("http://mysilicon.cn/address/add")
+                    .post(requestBody)
+                    .build();
+            Call call = client.newCall(request);
+            Response response = null;
+            String result = null;
+            try {
+                response = call.execute();
+                result = response.body().string();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (response.code() != 200) {
+                Looper.prepare();
                 Toast.makeText(AddressManagerActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
-
+                Looper.loop();
+            } else {
+                handler.sendEmptyMessage(1);
             }
-
-            @Override
-            public void onResponse(okhttp3.Call call, Response response) throws IOException {
-                String result = response.body().string();
-                Log.d(TAG, "onResponse: " + result);
-                //Toast.makeText(AddressManagerActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
-            }
-
-        });
-
+        }).start();
 
     }
 

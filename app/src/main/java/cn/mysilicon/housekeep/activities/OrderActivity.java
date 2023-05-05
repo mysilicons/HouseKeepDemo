@@ -32,6 +32,7 @@ import okhttp3.Response;
 public class OrderActivity extends AppCompatActivity {
     private static final String TAG = "OrderActivity";
     private List<Order> orderList;
+    private Integer user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class OrderActivity extends AppCompatActivity {
 
         //获取用户id
         SharedPreferences sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
-        Integer user_id = sharedPreferences.getInt("user_id", 0);
+        user_id = sharedPreferences.getInt("user_id", 0);
 
         //获取数据
         getData(user_id);
@@ -134,5 +135,12 @@ public class OrderActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //获取数据
+        getData(user_id);
     }
 }

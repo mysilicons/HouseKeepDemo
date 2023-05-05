@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -164,8 +165,17 @@ public class PreOrderActivity extends AppCompatActivity {
             } else if (tvAddress.getText().toString().equals("请选择地址")) {
                 Toast.makeText(PreOrderActivity.this, "请选择地址", Toast.LENGTH_SHORT).show();
             } else {
-                String server_time = tvDate.getText().toString() + "+" + tvTime.getText().toString() + ":00";
-                buy(server_time, id, address_id, user_id);
+                AlertDialog alertDialog = new AlertDialog.Builder(PreOrderActivity.this)
+                        .setTitle("提示")
+                        .setMessage("确定预约吗？")
+                        .setPositiveButton("确定", (dialog, which) -> {
+                            String server_time = tvDate.getText().toString() + "+" + tvTime.getText().toString() + ":00";
+                            buy(server_time, id, address_id, user_id);
+                        })
+                        .setNegativeButton("取消", (dialog, which) -> {
+                        })
+                        .create();
+                alertDialog.show();
             }
         });
     }

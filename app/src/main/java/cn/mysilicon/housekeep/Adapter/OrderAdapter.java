@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -84,18 +85,53 @@ public class OrderAdapter extends RecyclerView.Adapter {
             ((ViewHolder) holder).finish.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    finish(order.getId());
-                    fresh(position);
-                    ((ViewHolder) holder).finish.setText("删除");
+                    AlertDialog alertDialog = new AlertDialog.Builder(mContext)
+                            .setTitle("提示")
+                            .setMessage("是否确认完成订单？")
+                            .setPositiveButton("确定", (dialog, which) -> {
+                                finish(order.getId());
+                                fresh(position);
+                                ((ViewHolder) holder).finish.setText("删除");
+                            })
+                            .setNegativeButton("取消", (dialog, which) -> {
+                            })
+                            .create();
+                    alertDialog.show();
                 }
             });
-        }
-        if (order.getCur_status().equals("已完成")) {
+        } else if (order.getCur_status().equals("已完成")) {
             ((ViewHolder) holder).finish.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    delete(order.getId());
-                    remove(position);
+                    AlertDialog alertDialog = new AlertDialog.Builder(mContext)
+                            .setTitle("提示")
+                            .setMessage("是否确认删除订单？")
+                            .setPositiveButton("确定", (dialog, which) -> {
+                                delete(order.getId());
+                                remove(position);
+                            })
+                            .setNegativeButton("取消", (dialog, which) -> {
+                            })
+                            .create();
+                    alertDialog.show();
+                }
+            });
+            ((ViewHolder) holder).finish.setText("删除");
+        } else if (order.getCur_status().equals("已取消")) {
+            ((ViewHolder) holder).finish.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog alertDialog = new AlertDialog.Builder(mContext)
+                            .setTitle("提示")
+                            .setMessage("是否确认删除订单？")
+                            .setPositiveButton("确定", (dialog, which) -> {
+                                delete(order.getId());
+                                remove(position);
+                            })
+                            .setNegativeButton("取消", (dialog, which) -> {
+                            })
+                            .create();
+                    alertDialog.show();
                 }
             });
             ((ViewHolder) holder).finish.setText("删除");

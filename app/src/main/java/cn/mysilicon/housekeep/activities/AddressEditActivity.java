@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -73,8 +74,16 @@ public class AddressEditActivity extends AppCompatActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
                 Integer user_id = sharedPreferences.getInt("user_id", 0);
                 Address new_address = new Address(id, user_id, nameStr, phoneStr, addressStr);
-                //发送地址信息到服务器
-                editAddress(new_address);
+                AlertDialog.Builder builder = new AlertDialog.Builder(AddressEditActivity.this);
+                builder.setTitle("提示");
+                builder.setMessage("确定保存地址吗？");
+                builder.setPositiveButton("确定", (dialog, which) -> {
+                    //发送地址信息到服务器
+                    editAddress(new_address);
+                });
+                builder.setNegativeButton("取消", (dialog, which) -> {
+                });
+                builder.show();
             }
         });
     }
