@@ -93,17 +93,17 @@ public class OrderActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                OkHttpClient client = new OkHttpClient();
-                Request request = new Request.Builder()
+                OkHttpClient client = new OkHttpClient();//创建OkHttpClient对象
+                Request request = new Request.Builder()//创建Request 对象
                         .url("http://mysilicon.cn/order/list?user_id=" + user_id)
                         .get()
                         .build();
-                Call call = client.newCall(request);
+                Call call = client.newCall(request);//创建Call对象
                 Response response = null;
                 String result = null;
                 try {
-                    response = call.execute();
-                    result = response.body().string();
+                    response = call.execute();//得到Response 对象
+                    result = response.body().string();//得到字符串
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -114,7 +114,7 @@ public class OrderActivity extends AppCompatActivity {
                 } else {
                     // 请求成功，处理结果
                     Log.d(TAG, "onResponse: " + result);
-                    orderList = JSONObject.parseArray(result, Order.class);
+                    orderList = JSONObject.parseArray(result, Order.class);//将字符串转换为订单List
                     handler.sendEmptyMessage(0);
                 }
             }

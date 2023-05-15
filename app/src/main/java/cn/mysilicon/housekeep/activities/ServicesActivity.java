@@ -167,10 +167,10 @@ public class ServicesActivity extends AppCompatActivity {
                 return LIST_COLUMN_DOUBLE;
             }
         });
-        mRvSearchResult.setLayoutManager(mLayoutManager);
+        mRvSearchResult.setLayoutManager(mLayoutManager);//设置布局管理器
         mAdapterSearchResult = new SearchResultAdapter(ServiceItemBeanList, this, this);
-        mAdapterSearchResult.setListColumn(LIST_COLUMN_SINGLE);
-        mRvSearchResult.setAdapter(mAdapterSearchResult);
+        mAdapterSearchResult.setListColumn(LIST_COLUMN_SINGLE);//设置单双列
+        mRvSearchResult.setAdapter(mAdapterSearchResult);//设置适配器
         mIvSwitch.setImageDrawable(ContextCompat.getDrawable(ServicesActivity.this, R.drawable.img_double));
 
         mIvSwitch.setOnClickListener(new View.OnClickListener() {

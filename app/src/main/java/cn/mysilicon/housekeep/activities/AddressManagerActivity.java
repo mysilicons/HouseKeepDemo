@@ -101,18 +101,18 @@ public class AddressManagerActivity extends AppCompatActivity {
         BtnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nameStr = name.getText().toString();
-                String phoneStr = phone.getText().toString();
-                String cityStr = mTvCity.getText().toString();
-                String addressStr = address.getText().toString();
-                String finalAddress = cityStr + addressStr;
+                String nameStr = name.getText().toString();//获取姓名
+                String phoneStr = phone.getText().toString();//获取电话
+                String cityStr = mTvCity.getText().toString();//获取城市
+                String addressStr = address.getText().toString();//获取详细地址
+                String finalAddress = cityStr + addressStr;//最终地址
                 if (nameStr.equals("") || phoneStr.equals("") || addressStr.equals("") || cityStr.equals("")) {
                     Toast.makeText(AddressManagerActivity.this, "请填写完整信息", Toast.LENGTH_SHORT).show();
                 } else {
                     SharedPreferences sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
                     Integer user_id = sharedPreferences.getInt("user_id", 0);
-                    address1 = new Address(user_id, nameStr, phoneStr, finalAddress);
-                    sendAddress(address1);
+                    address1 = new Address(user_id, nameStr, phoneStr, finalAddress);//创建地址对象
+                    sendAddress(address1);//发送地址到服务器
                 }
             }
         });

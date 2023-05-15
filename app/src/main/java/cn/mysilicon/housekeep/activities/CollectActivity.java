@@ -168,7 +168,6 @@ public class CollectActivity extends AppCompatActivity implements GoodsCallback,
                     if (storeBean.isChecked()) {
                         //全选服务
                         storeAdapter.controlGoods(storeBean.getClassification2_id(), true);
-
                         //添加到列表中
                         if (!shopIdList.contains(storeBean.getClassification2_id())) {
                             //如果列表中没有这个Id且当前分类为选中状态
@@ -177,7 +176,6 @@ public class CollectActivity extends AppCompatActivity implements GoodsCallback,
                     } else {
                         //清除全选服务
                         storeAdapter.controlGoods(storeBean.getClassification2_id(), false);
-
                         //从列表中清除
                         if (shopIdList.contains(storeBean.getClassification2_id())) {
                             shopIdList.remove((Integer) storeBean.getClassification2_id());
