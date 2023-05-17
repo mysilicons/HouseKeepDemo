@@ -80,11 +80,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- 地图的key -->
+        </activity>
+        <!-- 地图的key -->
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="304c933d7cf95a1d881708ef62fe1342" />
-
+            android:value="地图的key" />
         <service android:name="com.amap.api.location.APSService" />
     </application>
 

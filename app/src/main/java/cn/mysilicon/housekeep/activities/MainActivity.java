@@ -38,9 +38,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //环信
         Context context = getApplicationContext();
         EMOptions options = new EMOptions();
-        options.setAppKey("1140230503163929#demo");
+        options.setAppKey("API key");
         // 其他 EMOptions 配置。
         EMClient.getInstance().init(context, options);
 
