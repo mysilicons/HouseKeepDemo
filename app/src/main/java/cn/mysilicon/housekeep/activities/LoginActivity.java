@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (usernameStr.length() != 11) {
                         Toast.makeText(LoginActivity.this, "手机号应为11位数", Toast.LENGTH_SHORT).show();
                     }
-                    String url = "http://mysilicon.cn/user/login";
+                    String url = "http://你的服务器地址/user/login";
                     RequestQueue requestQueue = Volley.newRequestQueue(LoginActivity.this);
                     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
                         @Override

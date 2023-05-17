@@ -454,7 +454,7 @@ public class CollectActivity extends AppCompatActivity implements GoodsCallback,
             public void run() {
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
-                        .url("http://mysilicon.cn/collect/list?user_id=" + user_id)
+                        .url("http://你的服务器地址/collect/list?user_id=" + user_id)
                         .get()
                         .build();
                 Call call = client.newCall(request);
@@ -492,7 +492,7 @@ public class CollectActivity extends AppCompatActivity implements GoodsCallback,
 
                 // 创建Request对象
                 Request request = new Request.Builder()
-                        .url("http://mysilicon.cn/collect/delete?id=" + id)
+                        .url("http://你的服务器地址/collect/delete?id=" + id)
                         .post(RequestBody.create("", null))
                         .build();
                 Response response = null;
@@ -523,7 +523,7 @@ public class CollectActivity extends AppCompatActivity implements GoodsCallback,
 
                 // 创建Request对象
                 Request request = new Request.Builder()
-                        .url("http://mysilicon.cn/order/add?server_time=" + server_time + "&service_id=" + service_id + "&address_id=" + address_id + "&user_id=" + user_id)
+                        .url("http://你的服务器地址/order/add?server_time=" + server_time + "&service_id=" + service_id + "&address_id=" + address_id + "&user_id=" + user_id)
                         .post(RequestBody.create("", null))
                         .build();
                 Response response = null;

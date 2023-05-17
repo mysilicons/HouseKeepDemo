@@ -84,7 +84,7 @@ public class PreOrderActivity extends AppCompatActivity {
 
             // 创建Request对象
             Request request = new Request.Builder()
-                    .url("http://mysilicon.cn/address/list?uid=" + user_id)
+                    .url("http://你的服务器地址/address/list?uid=" + user_id)
                     .get()
                     .build();
             Call call = client.newCall(request);
@@ -186,7 +186,7 @@ public class PreOrderActivity extends AppCompatActivity {
             public void run() {
                 // 创建OkHttpClient对象
                 OkHttpClient client = new OkHttpClient();
-                String url = "http://mysilicon.cn/order/add?server_time=" + server_time + "&service_id=" + service_id + "&address_id=" + address_id + "&user_id=" + user_id;
+                String url = "http://你的服务器地址/order/add?server_time=" + server_time + "&service_id=" + service_id + "&address_id=" + address_id + "&user_id=" + user_id;
                 Log.d(TAG, "run: " + url);
                 // 创建Request对象
                 Request request = new Request.Builder()

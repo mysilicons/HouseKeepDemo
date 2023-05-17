@@ -185,7 +185,7 @@ public class OrderDetailActivity extends AppCompatActivity {
             public void run() {
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
-                        .url("http://mysilicon.cn/order/cancel?id=" + order_id)
+                        .url("http://你的服务器地址/order/cancel?id=" + order_id)
                         .post(RequestBody.create("", null))
                         .build();
                 Response response = null;
@@ -213,7 +213,7 @@ public class OrderDetailActivity extends AppCompatActivity {
             public void run() {
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
-                        .url("http://mysilicon.cn/order/finish?id=" + order_id)
+                        .url("http://你的服务器地址/order/finish?id=" + order_id)
                         .post(RequestBody.create("", null))
                         .build();
                 Response response = null;
@@ -241,7 +241,7 @@ public class OrderDetailActivity extends AppCompatActivity {
             public void run() {
                 // 创建OkHttpClient对象
                 OkHttpClient client = new OkHttpClient();
-                String url = "http://mysilicon.cn/order/get?id=" + orderId;
+                String url = "http://你的服务器地址/order/get?id=" + orderId;
                 // 创建Request对象
                 Request request = new Request.Builder()
                         .url(url)

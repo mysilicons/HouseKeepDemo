@@ -173,7 +173,7 @@ public class AddressManagerActivity extends AppCompatActivity {
 
             // 创建Request对象
             Request request = new Request.Builder()
-                    .url("http://mysilicon.cn/address/add")
+                    .url("http://你的服务器地址/address/add")
                     .post(requestBody)
                     .build();
             Call call = client.newCall(request);

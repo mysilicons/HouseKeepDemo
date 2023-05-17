@@ -110,7 +110,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
             @Override
             public void run() {
                 OkHttpClient client = new OkHttpClient();
-                String url = "http://mysilicon.cn/address/delete?id=" + id;
+                String url = "http://你的服务器地址/address/delete?id=" + id;
                 okhttp3.Request request = new okhttp3.Request.Builder()
                         .url(url)
                         .post(RequestBody.create("", null))

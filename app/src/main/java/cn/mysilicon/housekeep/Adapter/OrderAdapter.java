@@ -182,7 +182,7 @@ public class OrderAdapter extends RecyclerView.Adapter {
             public void run() {
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
-                        .url("http://mysilicon.cn/order/delete?id=" + service_id)
+                        .url("http://你的服务器地址/order/delete?id=" + service_id)
                         .post(RequestBody.create("", null))
                         .build();
                 Response response = null;
@@ -210,7 +210,7 @@ public class OrderAdapter extends RecyclerView.Adapter {
             public void run() {
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
-                        .url("http://mysilicon.cn/order/finish?id=" + service_id)
+                        .url("http://你的服务器地址/order/finish?id=" + service_id)
                         .post(RequestBody.create("", null))
                         .build();
                 Response response = null;

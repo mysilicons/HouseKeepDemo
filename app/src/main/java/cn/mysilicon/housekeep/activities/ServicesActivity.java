@@ -73,7 +73,7 @@ public class ServicesActivity extends AppCompatActivity {
 
                 // 创建Request对象
                 Request request = new Request.Builder()
-                        .url("http://mysilicon.cn/service/classification1?classification1=" + classification1)
+                        .url("http://你的服务器地址/service/classification1?classification1=" + classification1)
                         .get()
                         .build();
                 Call call = client.newCall(request);
@@ -107,7 +107,7 @@ public class ServicesActivity extends AppCompatActivity {
 
                 // 创建Request对象
                 Request request = new Request.Builder()
-                        .url("http://mysilicon.cn/service/classification2?classification2=" + classification2)
+                        .url("http://你的服务器地址/service/classification2?classification2=" + classification2)
                         .get()
                         .build();
                 Call call = client.newCall(request);

@@ -48,7 +48,7 @@ public class CommentActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String url = "http://mysilicon.cn/comment/getCommentByUserId?user_id=" + user_id;
+                String url = "http://你的服务器地址/comment/getCommentByUserId?user_id=" + user_id;
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
                         .url(url)

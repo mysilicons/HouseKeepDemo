@@ -71,7 +71,7 @@ public class DetailsActivity extends AppCompatActivity {
 
                 // 创建Request对象
                 Request request = new Request.Builder()
-                        .url("http://mysilicon.cn/service/detail?id=" + id)
+                        .url("http://你的服务器地址/service/detail?id=" + id)
                         .get()
                         .build();
                 Call call = client.newCall(request);
@@ -105,7 +105,7 @@ public class DetailsActivity extends AppCompatActivity {
 
                 // 创建Request对象
                 Request request = new Request.Builder()
-                        .url("http://mysilicon.cn/comment/list?service_id=" + id)
+                        .url("http://你的服务器地址/comment/list?service_id=" + id)
                         .get()
                         .build();
                 Call call = client.newCall(request);
@@ -240,7 +240,7 @@ public class DetailsActivity extends AppCompatActivity {
         new Thread(() -> {
             // 创建OkHttpClient对象
             OkHttpClient client = new OkHttpClient();
-            String url = "http://mysilicon.cn/merchant/getConversationId?merchant_id=" + merchant_id;
+            String url = "http://你的服务器地址/merchant/getConversationId?merchant_id=" + merchant_id;
             // 创建Request对象
             Request request = new Request.Builder()
                     .url(url)
@@ -271,7 +271,7 @@ public class DetailsActivity extends AppCompatActivity {
             public void run() {
                 // 创建OkHttpClient对象
                 OkHttpClient client = new OkHttpClient();
-                String url = "http://mysilicon.cn/collect/add?user_id=" + user_id + "&service_id=" + service_id;
+                String url = "http://你的服务器地址/collect/add?user_id=" + user_id + "&service_id=" + service_id;
                 Log.d(TAG, "run: " + url);
                 // 创建Request对象
                 Request request = new Request.Builder()

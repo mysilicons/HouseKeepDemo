@@ -64,7 +64,7 @@ public class CommentDetailActivity extends AppCompatActivity {
 
     private void addComment(Integer userId, Integer id, String comment) {
         new Thread(() -> {
-            String url = "http://mysilicon.cn/comment/add?user_id=" + userId + "&service_id=" + id + "&comment=" + comment+"";
+            String url = "http://你的服务器地址/comment/add?user_id=" + userId + "&service_id=" + id + "&comment=" + comment+"";
             Log.d("CommentDetailActivity", url);
             OkHttpClient client = new OkHttpClient();
             Request request = new okhttp3.Request.Builder()

@@ -95,7 +95,7 @@ public class OrderActivity extends AppCompatActivity {
             public void run() {
                 OkHttpClient client = new OkHttpClient();//创建OkHttpClient对象
                 Request request = new Request.Builder()//创建Request 对象
-                        .url("http://mysilicon.cn/order/list?user_id=" + user_id)
+                        .url("http://你的服务器地址/order/list?user_id=" + user_id)
                         .get()
                         .build();
                 Call call = client.newCall(request);//创建Call对象

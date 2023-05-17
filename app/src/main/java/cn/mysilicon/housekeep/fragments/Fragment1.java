@@ -271,7 +271,7 @@ public class Fragment1 extends Fragment {
 
                 // 创建Request对象
                 Request request = new Request.Builder()
-                        .url("http://mysilicon.cn/bannerimage/list")
+                        .url("http://你的服务器地址/bannerimage/list")
                         .get()
                         .build();
                 Call call = client.newCall(request);
@@ -308,7 +308,7 @@ public class Fragment1 extends Fragment {
 
                 // 创建Request对象
                 Request request = new Request.Builder()
-                        .url("http://mysilicon.cn/service/list")
+                        .url("http://你的服务器地址/service/list")
                         .get()
                         .build();
                 Call call = client.newCall(request);

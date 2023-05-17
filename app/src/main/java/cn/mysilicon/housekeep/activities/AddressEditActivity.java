@@ -127,7 +127,7 @@ public class AddressEditActivity extends AppCompatActivity {
             String json = gson.toJson(newAddress);
             okhttp3.RequestBody requestBody = okhttp3.RequestBody.create(json, okhttp3.MediaType.parse("application/json; charset=utf-8"));
             okhttp3.Request request = new okhttp3.Request.Builder()
-                    .url("http://mysilicon.cn/address/edit")
+                    .url("http://你的服务器地址/address/edit")
                     .post(requestBody)
                     .build();
             Response response = null;
